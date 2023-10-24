@@ -17,6 +17,7 @@ public class Place {
 		this.nbre_jetons-=rm;;
 		
 	}
+	
 		
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub

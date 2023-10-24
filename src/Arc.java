@@ -97,6 +97,11 @@ public class Arc {
 		Place p = this.getPlace();
 		return p.getNbreJetons() >= this.getPoids();
 	}
+
+	public void fire() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 //	public void fire() {
 //		Place p = this.getPlace();

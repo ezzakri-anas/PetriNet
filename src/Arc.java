@@ -98,4 +98,9 @@ public class Arc {
 		return p.getNbreJetons() >= this.getPoids();
 	}
 	
+//	public void fire() {
+//		Place p = this.getPlace();
+//		p.setNbreJetons(0);
+//	}
+	
 }

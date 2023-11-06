@@ -1,6 +1,8 @@
 /**
  * 
  */
+package petrinet;
+
 import java.util.LinkedList;
 /**
  * 
@@ -52,7 +54,7 @@ public class Transition {
 		this.setArcsSortants(arcs);// à tester si on peut ajouter un arc sans le setter
 	}
 	
-	public void rmArc(Arc arc) {
+	public void rmArc(Arc arc) throws Exception {
 		LinkedList<Arc> sortants = this.getArcsSortants();
 		LinkedList<Arc> entrants = this.getArcsEntrants();
 
@@ -63,7 +65,7 @@ public class Transition {
 			entrants.remove(arc);
 			this.setArcsEntrants(entrants);
 		} else {
-			System.out.println("L'arc " + arc + "n'est pas lié à cette transition");
+			throw new Exception("Number must be non-negative");
 		}
 	}
 

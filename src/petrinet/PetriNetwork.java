@@ -1,3 +1,4 @@
+package petrinet;
 import java.util.LinkedList;
 
 
@@ -56,6 +57,18 @@ public class PetriNetwork {
 		Arc arc= new Arc(poids,transition,place, isZeroorVideur);
 		this.liste_des_arcs.add(arc);
 	}
+	public void addArcZero(Transition transition, Place place) {
+		Arc arc= new ArcZero(transition, place, true);
+		this.liste_des_arcs.add(arc);
+	}
+	public void addArcVideur(Transition transition, Place place) {
+		Arc arc=new ArcVideur(transition,  place, true);
+		this.liste_des_arcs.add(arc);
+	}
+	public LinkedList<Arc> getArc() {
+		
+		return this.liste_des_arcs;
+	}
 	public void changeArcValue (Arc arc, int poids) {
 		arc.setPoids(poids);
 		
@@ -65,29 +78,36 @@ public class PetriNetwork {
 		
 	}
 	public boolean isArcUnique (Arc arc) {
-		for (Arc transitions : this.liste_des_arcs) {
-			if (transitions.equals(arc)) {
-				return true;
+		for (Arc arc_transitions : this.liste_des_arcs) {
+			if (arc_transitions.equals(arc)) {
+				return false;
 				
 			}
 		}
-		return false;
+		return true;
 		
 	}
 	public void Pas(Transition T) {
+		//on verifie d abrd que c est titable
+		boolean tirable= true;
+		for (Arc arc : T.getArcsEntrants()) {
+			if(!arc.isActive()) {
+				;
+			}
+			$
+				
+			}}
 		for (Arc arc : T.getArcsEntrants()) {
 			if(arc.isVideurOrZero()) {
 				arc.fire();
 			}
 			else {
 				if(arc.isActive()) {
-				Place place= arc.getPlace();
-				place.rmNbreJetons(arc.getPoids());	
+				arc.getPlace().rmNbreJetons(arc.getPoids());	
 		}
 			}
 		for (Arc arc1 : T.getArcsSortants()) {
-			Place place= arc1.getPlace();
-			place.setNbreJetons(place.getNbreJetons()+arc1.getPoids());	
+			arc1.getPlace().setNbreJetons(arc1.getPlace().getNbreJetons()+arc1.getPoids());	
 		}
 			
 		}

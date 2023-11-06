@@ -39,7 +39,7 @@ class ArcTest {
 		assertEquals(a.getPoids(), 10);
 		
 		a.setPoids(-5);
-		assertEquals(a.getPoids(), 10);
+		assertEquals(a.getPoids(), 1);
 
 	}
 

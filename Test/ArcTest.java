@@ -2,6 +2,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
+import petrinet.Arc;
+import petrinet.Place;
+import petrinet.Transition;
+
 class ArcTest {
 
 	@Test
@@ -35,7 +39,7 @@ class ArcTest {
 		assertEquals(a.getPoids(), 10);
 		
 		a.setPoids(-5);
-		assertEquals(a.getPoids(), 10);
+		assertEquals(a.getPoids(), 1);
 
 	}
 

@@ -42,7 +42,7 @@ public class Arc {
 	 * @param poids the poids to set
 	 */
 	public void setPoids(int poids) {
-		this.poids = poids;
+		this.poids = poids >= 1 ? poids : 1;
 	}
 
 	/**

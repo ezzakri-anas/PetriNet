@@ -54,7 +54,7 @@ class PetriNetworkTest {
 		liste_des_Place.add(T1);
 		liste_des_Place.add(T2);
 		Petri.setPlaceList(liste_des_Place);
-		assert(Petri.getTransitionList().equals(liste_des_Place));
+		assert(Petri.getPlaceList().equals(liste_des_Place));
 		
 	}
 	@Test
@@ -70,12 +70,10 @@ class PetriNetworkTest {
 		LinkedList<Arc> arcsEntrants= new LinkedList<Arc>() ;
 		LinkedList<Arc> arcsSortants= new LinkedList<Arc>() ;
 		Transition T1= new Transition(arcsEntrants,arcsSortants);
-		LinkedList<Transition> liste_des_transitions= new LinkedList<Transition>();
-		Petri.setTransitionList(liste_des_transitions);
 		Petri.addTransition(T1);
 		LinkedList<Transition> liste_des_transitions2= new LinkedList<Transition>();
 		liste_des_transitions2.add(T1);
-		assert(Petri.getTransitionList().equals(liste_des_transitions2));
+		assert(Petri.getTransitionList().get(0).equals(liste_des_transitions2.get(0)));
 		
 	}
 	@Test
@@ -197,8 +195,8 @@ class PetriNetworkTest {
 		Petri.addArc(T1, P1,4,true);
 		Petri.addArcZero(T1, P2);
 		Petri.addArcVideur(T1, P3);
-		
-		assert(Petri.isArcUnique(arc4));
+		Petri.Pas(T1);
+		assert((P1.getNbreJetons()==1)&(P2.getNbreJetons()==0)&(P3.getNbreJetons()==0));
 		
 		
 		

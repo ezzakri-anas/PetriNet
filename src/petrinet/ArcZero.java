@@ -1,6 +1,7 @@
 /**
  * 
  */
+package petrinet;
 
 /**
  * 
@@ -15,7 +16,7 @@ public class ArcZero extends Arc{
 	}
 	
 	public boolean isActive() {
-		return true;
+		return this.getPlace().getNbreJetons()==0;
 	}
 	
 	public void fire() {

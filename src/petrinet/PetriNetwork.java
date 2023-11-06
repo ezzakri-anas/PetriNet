@@ -92,12 +92,13 @@ public class PetriNetwork {
 		boolean tirable= true;
 		for (Arc arc : T.getArcsEntrants()) {
 			if(!arc.isActive()) {
-				;
+				tirable= false;
 			}
-			$
+			
 				
-			}}
-		for (Arc arc : T.getArcsEntrants()) {
+			}
+		if(tirable) {
+			for (Arc arc : T.getArcsEntrants()) {
 			if(arc.isVideurOrZero()) {
 				arc.fire();
 			}
@@ -110,6 +111,7 @@ public class PetriNetwork {
 			arc1.getPlace().setNbreJetons(arc1.getPlace().getNbreJetons()+arc1.getPoids());	
 		}
 			
+		}
 		}
 		
 		

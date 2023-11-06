@@ -13,7 +13,12 @@ public class Arc {
 	private boolean isVideurOrZero;
 	
 	public Arc(int poids, Transition transition, Place place, boolean isVideurOrZero) {
-		this.poids = poids;
+		if(poids < 1) {
+			this.poids = 1;
+		} else {
+			this.poids = poids;
+		}
+		
 		this.place = place;
 		this.transition = transition;
 		this.isVideurOrZero = isVideurOrZero;
@@ -82,13 +87,13 @@ public class Arc {
 		this.isVideurOrZero = isVideurOrZero;
 	}
 
-	public void addJetons(int jetons) {
+	public void addJetons() {
 		Place p = this.getPlace();
 		int pds = this.getPoids();
 		p.setNbreJetons(p.getNbreJetons() + pds);
 	}
 	
-	public void removeJetons(int jetons) {
+	public void removeJetons() {
 		Place p = this.getPlace();
 		int pds = this.getPoids();
 		p.rmNbreJetons(pds);
@@ -100,13 +105,6 @@ public class Arc {
 	}
 
 	public void fire() {
-		// TODO Auto-generated method stub
 		
 	}
-	
-//	public void fire() {
-//		Place p = this.getPlace();
-//		p.setNbreJetons(0);
-//	}
-	
 }

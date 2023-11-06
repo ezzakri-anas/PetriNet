@@ -4,7 +4,7 @@ public class Place {
 	private int nbre_jetons;
 
 	public Place(int nbre_jetons) {
-		this.nbre_jetons=nbre_jetons;
+		this.nbre_jetons = Math.abs(nbre_jetons);
 	}
 	public int getNbreJetons() {
 		return nbre_jetons;
@@ -17,12 +17,6 @@ public class Place {
 	public void rmNbreJetons(int rm) {
 		this.nbre_jetons-=rm;;
 		
-	}
-	
-		
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
 	}
 
 }

@@ -1,5 +1,7 @@
 package petrinet;
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
 
 
 
@@ -116,6 +118,7 @@ public class PetriNetwork {
 	}
 	public void Pas(Transition T) {
 		//on verifie d abrd que c est titable
+		
 		boolean tirable= true;
 		for (Arc arc : T.getArcsEntrants()) {
 			if(!arc.isActive()) {
@@ -149,9 +152,179 @@ public class PetriNetwork {
 			}
 		
 	}
-		public static void main(String[] args) {
-		// TODO Auto-generated method stub
+	
+	
+	public void AfficherPetriNet() {
+		
+		System.out.println("Réseau de Petri \n");
+		
+		int nbre_arcs = this.liste_des_arcs.size();
+		int nbre_transitions = this.liste_des_transitions.size();
+		int nbre_places = this.liste_des_places.size();
+		
+		System.out.println(nbre_places + " places");
+		System.out.println(nbre_transitions + " transitions");	
+		System.out.println(nbre_arcs + " arcs");	
+		
+		System.out.println("\nListe des transitions");	
+		
+		for(int i=0; i<nbre_transitions; i++) {
+			Transition t = this.liste_des_transitions.get(i);
+			LinkedList<Arc> arcs_entrants = t.getArcsEntrants();
+			LinkedList<Arc> arcs_sortants = t.getArcsSortants();
+			System.out.println(i+1 + " : transition, " + arcs_entrants.size() + " arc(s) entrant(s), " + arcs_sortants.size() + " arc(s) sortant(s)");	
+		}
+		
+		Map<Object, Object> Arc_destination = new HashMap<>();
+		Map<Object, Object> Arc_source = new HashMap<>();
+		
+		Map<Object, LinkedList<Object>> Place_entrants = new HashMap<>();
+		Map<Object, LinkedList<Object>> Place_sortants = new HashMap<>();
+		
+		for(int i=0; i<nbre_transitions; i++) {
+			Transition t = this.liste_des_transitions.get(i);
+			
+			LinkedList<Arc> arcs_entrants = t.getArcsEntrants();
+			LinkedList<Arc> arcs_sortants = t.getArcsSortants();
+			
+			
+			for(int j=0; j<arcs_entrants.size(); j++) {
+				Arc arc = arcs_entrants.get(j);
+				
+				Place place = arc.getPlace();
+				
+				Arc_destination.put(arc, t);
+				Arc_source.put(arc, arc.getPlace());
+				
+				if(Place_sortants.containsKey(place)) {
+					LinkedList<Object> values = Place_sortants.get(place);
+					values.addFirst(arc);
+					Place_sortants.put(place, values);
+				} else {
+					LinkedList<Object> values = new LinkedList<Object>();
+					values.addFirst(arc);
+					Place_sortants.put(place, values);
+				}
+			}
+			
+			for(int j=0; j<arcs_sortants.size(); j++) {
+				Arc arc = arcs_sortants.get(j);
+				Place place = arc.getPlace();
+				
+				Arc_destination.put(arc, arc.getPlace());
+				Arc_source.put(arc, t);
+				
+				if(Place_entrants.containsKey(place)) {
+					LinkedList<Object> values = Place_entrants.get(place);
+					values.addFirst(arc);
+					Place_entrants.put(place, values);
+				} else {
+					LinkedList<Object> values = new LinkedList<Object>();
+					values.addFirst(arc);
+					Place_entrants.put(place, values);
+				}
+			}
+		}
+		
+		System.out.println("\nListe des arcs");	
+		
+		for(int i=0; i<nbre_arcs; i++) {
+			Arc arc = this.liste_des_arcs.get(i);
+			
+			Class<?> arc_class = arc.getClass();
+			
+			if(Arc_destination.get(arc) instanceof Place) {
+				System.out.println(i+1 + " : arc de type " + arc_class + " poids " + arc.getPoids() + 
+						" (place avec " + arc.getPlace().getNbreJetons() + " jetons vers transition)");	
+			} else {
+				System.out.println(i+1 + " : arc de type " + arc_class + " poids " + arc.getPoids() + 
+						" (Transition vers place avec " + arc.getPlace().getNbreJetons() + " jetons)");	
+			}
+		}
+		
+		System.out.println("\nListe des places");	
+		
+		for(int i=0; i<nbre_places; i++) {
+			String message_arc_entrant = "";
+			String message_arc_sortant = "";
+			
+			Place place = this.liste_des_places.get(i);
+			if(Place_entrants.containsKey(place)) {
+				int nbre_arc_entrant = Place_entrants.get(place).size();
+				message_arc_entrant = " " + nbre_arc_entrant + " arcs entrants,";
+			}
+			
+			if(Place_sortants.containsKey(place)) {
+				int nbre_arc_sortant = Place_sortants.get(place).size();
+				message_arc_sortant = " " + nbre_arc_sortant + " arcs sortants,";
+			}
 
+			System.out.println(i+1 + " : place avec " + place.getNbreJetons() + " jetons, " + message_arc_entrant + "," + message_arc_sortant);	
+
+		}
+		
+	}
+
+	public static void main(String[] args) {
+		PetriNetwork Petri= new PetriNetwork();
+		Transition T1=  TransitionCree(Petri);
+		Transition T2=  TransitionCree(Petri);
+		Place P1= PlaceCree(5,Petri);
+		Place P2= PlaceCree(0,Petri);
+		Place P3= PlaceCree(1,Petri);
+		Petri.addArc(T1, P1,4,true,false);
+		Petri.addArcZero(T1, P2);
+		Petri.addArcZero(T2, P3);
+		
+		Petri.AfficherPetriNet();
+
+		
+		Petri.PasAll();
+		
+		
+		Petri.AfficherPetriNet();
+
+	}
+	
+	
+	
+	public static Transition TransitionCree( PetriNetwork Petri) {
+		LinkedList<Arc> arcsEntrants= new LinkedList<Arc>() ;
+		LinkedList<Arc> arcsSortants= new LinkedList<Arc>() ;
+		Transition T1= new Transition(arcsEntrants,arcsSortants);
+		Petri.addTransition(T1);
+		return T1;
+		
+		
+	}
+	public static Place PlaceCree(int poids,PetriNetwork Petri) {
+		
+		Place T1= new Place(poids);
+		Petri.addPlace(T1);
+		return T1;
+		
+	}
+	public static Arc arcCree(int poids, Transition transition, Place place,boolean entrsortie, boolean isVideurOrZero,PetriNetwork Petri) {
+		Arc arc= new Arc( poids,transition, place, isVideurOrZero);
+		Petri.addArc(transition, place, poids, entrsortie, isVideurOrZero);
+		
+		return arc;
+		
+		
+	}
+	public static Arc arcVCree( Transition transition, Place place,PetriNetwork Petri) {
+		Arc arc= new ArcVideur(transition,place ,true);
+		Petri.addArcVideur(transition, place);
+		
+		return arc;
+		
+	}
+	public static Arc arcZCree( Transition transition, Place place,PetriNetwork Petri) {
+		Arc arc= new ArcZero(transition,place ,true);
+		Petri.addArcZero(transition, place);
+		
+		return arc;
+		
 	}
 
 }

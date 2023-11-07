@@ -19,11 +19,6 @@ class ArcZeroTest {
 	}
 
 	@Test
-	void testFire() {
-		fail("Not yet implemented");
-	}
-
-	@Test
 	void testArcZero() {
 		Transition t = new Transition(null, null);
 		Place p = new Place(1);

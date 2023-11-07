@@ -17,13 +17,13 @@ class TransitionTest {
 	@Test
 	void testTransition() {
 		Transition T=new Transition(new LinkedList<Arc>() ,new LinkedList<Arc>() );
-		assert(T!=null) ;
+		assertNotNull(T) ;
 	}
 
 	@Test
 	void testGetArcsEntrants() {
 		Transition T=new Transition(new LinkedList<Arc>() ,new LinkedList<Arc>() );
-		assert(T.getArcsEntrants().size()==0);
+		assertEquals(T.getArcsEntrants().size(), 0);
 	}
 
 	@Test
@@ -34,13 +34,13 @@ class TransitionTest {
 		LinkedList<Arc> arcE= new LinkedList<Arc>();
 		arcE.add(arc);
 		T.setArcsEntrants(arcE);
-		assert(T.getArcsEntrants().equals(arcE));
+		assertEquals(T.getArcsEntrants(), arcE);
 	}
 
 	@Test
 	void testGetArcsSortants() {
 		Transition T=new Transition(new LinkedList<Arc>() ,new LinkedList<Arc>() );
-		assert(T.getArcsSortants().size()==0);
+		assertEquals(T.getArcsSortants().size(), 0);
 	}
 
 	@Test
@@ -51,7 +51,7 @@ class TransitionTest {
 		LinkedList<Arc> arcS= new LinkedList<Arc>();
 		arcS.add(arc);
 		T.setArcsSortants(arcS);
-		assert(T.getArcsSortants().equals(arcS));
+		assertEquals(T.getArcsSortants(), arcS);
 	}
 
 	@Test
@@ -62,7 +62,7 @@ class TransitionTest {
 		LinkedList<Arc> arcE= new LinkedList<Arc>();
 		arcE.add(arc);
 		T.addArcEntrant(arc);
-		assert(T.getArcsEntrants().equals(arcE));
+		assertEquals(T.getArcsEntrants(), arcE);
 	}
 
 	@Test
@@ -73,7 +73,7 @@ class TransitionTest {
 		LinkedList<Arc> arcS= new LinkedList<Arc>();
 		arcS.add(arc);
 		T.addArcsortant(arc);
-		assert(T.getArcsSortants().equals(arcS));
+		assertEquals(T.getArcsSortants(), arcS);
 	}
 
 	@Test
@@ -85,16 +85,15 @@ class TransitionTest {
 		arcS.add(arc);
 		T.addArcsortant(arc);
 		T.rmArc(arc);
-		assert(T.getArcsSortants().size()==0);
+		assertEquals(T.getArcsSortants().size(), 0);
 		LinkedList<Arc> arcE= new LinkedList<Arc>();
 		arcE.add(arc);
 		T.addArcEntrant(arc);
 		T.rmArc(arc);
-		assert(T.getArcsEntrants().size()==0);
+		assertEquals(T.getArcsEntrants().size(), 0);
 		assertThrows(Exception.class, () -> {
 			T.rmArc(arc);
         });
-		
 	}
 
 }

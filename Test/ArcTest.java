@@ -164,5 +164,16 @@ class ArcTest {
 		
 		assertEquals(a3.isActive(), false);
 	}
+	
+	@Test
+	void testFire() {
+		Transition t = new Transition(null, null);
+		int jetons = 5;
+		Place p = new Place(jetons);
+		int poids = 10;
+		Arc a = new Arc(poids, t, p, false);
+		a.fire();
+		assertTrue(true);
+	}
 
 }

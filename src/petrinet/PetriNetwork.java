@@ -58,20 +58,24 @@ public class PetriNetwork {
 	//entrée 1 sortie 0
 	public void addArc(Transition transition, Place place, int poids,boolean entrsort, boolean isZeroorVideur) {
 		Arc arc= new Arc(poids,transition,place, isZeroorVideur);
-		this.liste_des_arcs.add(arc);
-		for(Transition T: this.liste_des_transitions) {
-			if(T.equals(transition)) {
-				if(entrsort) {
-					T.addArcEntrant(arc);
-				}
-				else {
-					T.addArcsortant(arc);
+		if (this.isArcUnique(arc)) {
+			this.liste_des_arcs.add(arc);
+			for(Transition T: this.liste_des_transitions) {
+				if(T.equals(transition)) {
+					if(entrsort) {
+						T.addArcEntrant(arc);
+					}
+					else {
+						T.addArcsortant(arc);
+					}
 				}
 			}
 		}
+		
 	}
 	public void addArcZero(Transition transition, Place place) {
 		Arc arc= new ArcZero(transition, place, true);
+		if (this.isArcUnique(arc)) {
 		this.liste_des_arcs.add(arc);
 		for(Transition T: this.liste_des_transitions) {
 			if(T.equals(transition)) {
@@ -82,8 +86,10 @@ public class PetriNetwork {
 			}
 		}
 	}
+	}
 	public void addArcVideur(Transition transition, Place place) {
 		Arc arc=new ArcVideur(transition,  place, true);
+		if (this.isArcUnique(arc)) {
 		this.liste_des_arcs.add(arc);
 		for(Transition T: this.liste_des_transitions) {
 			if(T.equals(transition)) {
@@ -93,6 +99,7 @@ public class PetriNetwork {
 				
 			}
 		}
+	}
 	}
 	public LinkedList<Arc> getArc() {
 		

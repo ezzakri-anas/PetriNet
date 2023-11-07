@@ -251,7 +251,7 @@ class PetriNetworkTest {
 	@Test
 	void PasTest() {
 		PetriNetwork Petri= new PetriNetwork();
-		
+		//RD4
 		Transition T1= this.TransitionCree(Petri);
 		Place P1= this.PlaceCree(5,Petri);
 		Place P2= this.PlaceCree(0,Petri);
@@ -269,6 +269,37 @@ class PetriNetworkTest {
 		Petri.addArc(T1, P4,4,true,false);
 		Petri.Pas(T1);
 		assertEquals(P4.getNbreJetons(),2);
+		//RD1
+		Transition T10= this.TransitionCree(Petri);
+		Place P10= this.PlaceCree(3,Petri);
+		Petri.addArc(T10, P10,2,true,false);
+		assertEquals(P10.getNbreJetons(),3);
+		Petri.Pas(T10);
+		assertEquals(P10.getNbreJetons(),1);
+		//RD2
+		Petri= new PetriNetwork();
+		Transition T11= this.TransitionCree(Petri);
+		Place P11= this.PlaceCree(1,Petri);
+		Petri.addArc(T10, P10,2,true,false);
+		assertEquals(P10.getNbreJetons(),1);
+		Petri.Pas(T10);
+		assertEquals(P10.getNbreJetons(),1);
+		
+		//RD3
+		Petri= new PetriNetwork();
+		Transition T12= this.TransitionCree(Petri);
+		Place P12= this.PlaceCree(4,Petri);
+		Place P13= this.PlaceCree(0,Petri);
+		Petri.addArc(T10, P12,2,true,false);
+		Petri.addArc(T10, P13,1,true,false);
+		assertEquals(P12.getNbreJetons(),1);
+		assertEquals(P13.getNbreJetons(),0);
+		Petri.Pas(T10);
+		assertEquals(P12.getNbreJetons(),1);
+		assertEquals(P13.getNbreJetons(),1);
+		
+		
+		
 		
 		
 	}

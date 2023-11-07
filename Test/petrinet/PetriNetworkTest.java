@@ -353,9 +353,39 @@ class PetriNetworkTest {
 				+ "Liste des places\n"
 				+ "1 : place avec 5 jetons, , 1 arcs sortants,\n"
 				+ "2 : place avec 0 jetons, , 1 arcs sortants,\n"
-				+ "3 : place avec 1 jetons, , 1 arcs sortants,";
-		
+				+ "3 : place avec 1 jetons, , 1 arcs sortants,";		
 		assertEquals(FinalMessage, ExpectedMessage);
+		
+		
+		Petri= new PetriNetwork();
+		Transition T12= TransitionCree(Petri);
+		Place P12= PlaceCree(4,Petri);
+		Place P13= PlaceCree(0,Petri);
+		Petri.addArc(T12, P12,2,true,false);
+		Petri.addArc(T12, P13,1,true,false);
+		
+		
+		ExpectedMessage = "Réseau de Petri\n"
+				+ "2 places\n"
+				+ "1 transitions\n"
+				+ "2 arcs\n"
+				+ "\n"
+				+ "Liste des transitions\n"
+				+ "1 : transition, 2 arc(s) entrant(s), 0 arc(s) sortant(s)\n"
+				+ "\n"
+				+ "Liste des arcs\n"
+				+ "1 : arc de type class petrinet.Arc poids 2 (Transition vers place avec 4 jetons)\n"
+				+ "2 : arc de type class petrinet.Arc poids 1 (Transition vers place avec 0 jetons)\n"
+				+ "\n"
+				+ "Liste des places\n"
+				+ "1 : place avec 4 jetons, , 1 arcs sortants,\n"
+				+ "2 : place avec 0 jetons, , 1 arcs sortants,\n"
+				+ "";		
+		
+		FinalMessage = Petri.AfficherPetriNet();
+		assertEquals(FinalMessage, ExpectedMessage);
+
+	
 	}
 	
 

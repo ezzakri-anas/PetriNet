@@ -314,6 +314,10 @@ public class PetriNetwork {
 		Petri.addArcZero(T2, P3);
 		
 		System.out.println(Petri.AfficherPetriNet());
+		
+		Petri.PasAll();
+		
+		System.out.println(Petri.AfficherPetriNet());
 
 }
 	

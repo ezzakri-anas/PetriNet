@@ -22,21 +22,23 @@ class PetriNetworkTest {
 		
 		
 	}
-	void TransitionCree( PetriNetwork Petri) {
+	Transition TransitionCree( PetriNetwork Petri) {
 		LinkedList<Arc> arcsEntrants= new LinkedList<Arc>() ;
 		LinkedList<Arc> arcsSortants= new LinkedList<Arc>() ;
 		Transition T1= new Transition(arcsEntrants,arcsSortants);
 		Petri.addTransition(T1);
+		return T1;
 		
 		
 	}
-	void PlaceCree(int poids,PetriNetwork Petri) {
+	Place PlaceCree(int poids,PetriNetwork Petri) {
 		
 		Place T1= new Place(poids);
 		Petri.addPlace(T1);
+		return T1;
 		
 	}
-	void arcCree(int poids, Transition transition, Place place,boolean entrsortie, boolean isVideurOrZero,PetriNetwork Petri) {
+	Arc arcCree(int poids, Transition transition, Place place,boolean entrsortie, boolean isVideurOrZero,PetriNetwork Petri) {
 		Arc arc= new Arc( poids,transition, place, isVideurOrZero);
 		Petri.addArc(transition, place, poids, entrsortie, isVideurOrZero);
 		if(entrsortie) {
@@ -46,19 +48,22 @@ class PetriNetworkTest {
 		{
 			transition.addArcsortant(arc);
 		}
+		return arc;
 		
 		
 	}
-	void arcVCree( Transition transition, Place place,PetriNetwork Petri) {
+	Arc arcVCree( Transition transition, Place place,PetriNetwork Petri) {
 		Arc arc= new ArcVideur(transition,place ,true);
 		Petri.addArcVideur(transition, place);
 		transition.addArcEntrant(arc);
+		return arc;
 		
 	}
-	void arcZCree( Transition transition, Place place,PetriNetwork Petri) {
+	Arc arcZCree( Transition transition, Place place,PetriNetwork Petri) {
 		Arc arc= new ArcZero(transition,place ,true);
 		Petri.addArcZero(transition, place);
 		transition.addArcEntrant(arc);
+		return arc;
 		
 	}
 	@Test
@@ -68,13 +73,14 @@ class PetriNetworkTest {
 		assert(Petri.getTransitionList().size()==0);
 		assert(Petri.getArc().size()==0);
 		
+		
 	}
 	
 	@Test
 	public void setTransitionListTest() {
 		PetriNetwork Petri= this.PetriCree();
-		Transition T1= new Transition(arcsEntrants,arcsSortants);
-		Transition T2= new Transition(arcsEntrants,arcsSortants);
+		Transition T1= this.TransitionCree(Petri);
+		Transition T2= this.TransitionCree(Petri);
 		LinkedList<Transition> liste_des_transitions= new LinkedList<Transition>();
 		liste_des_transitions.add(T1);
 		liste_des_transitions.add(T2);

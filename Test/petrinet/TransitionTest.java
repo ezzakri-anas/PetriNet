@@ -1,4 +1,4 @@
-package Test;
+package petrinet;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -7,9 +7,6 @@ import java.util.LinkedList;
 
 import org.junit.jupiter.api.Test;
 
-import petrinet.Arc;
-import petrinet.Place;
-import petrinet.Transition;
 
 class TransitionTest {
 

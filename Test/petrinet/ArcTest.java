@@ -1,10 +1,7 @@
+package petrinet;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
-
-import petrinet.Arc;
-import petrinet.Place;
-import petrinet.Transition;
 
 class ArcTest {
 
@@ -132,8 +129,8 @@ class ArcTest {
 		int poids2 = 10;
 		Arc a2 = new Arc(poids2, t2, p2, false);
 		
-		a.removeJetons();
-		assertEquals(p.getNbreJetons(), 0); // expected result 0
+		a2.removeJetons();
+		assertEquals(p2.getNbreJetons(), 0); // expected result 0
 	}
 
 	@Test

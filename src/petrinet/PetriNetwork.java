@@ -32,7 +32,7 @@ public class PetriNetwork {
 		
 	}
 	public void rmTransition(Transition transition) {
-		for (Transition transitions : this.liste_des_transitions) {
+		for (Transition transitions : this.getTransitionList()) {
 			if (transitions.equals(transition)) {
 				this.liste_des_transitions.remove(transition);
 				
@@ -45,25 +45,52 @@ public class PetriNetwork {
 		
 	}
 	public void rmPlace(Place place)  {
-		for (Place transitions : this.liste_des_places) {
-			if (transitions.equals(place)) {
-				this.liste_des_transitions.remove(place);
+		for (Place P : this.liste_des_places) {
+			if (P.equals(place)) {
+				this.liste_des_places.remove(place);
 				
 			}
 		}
 		
 	}
-	public void addArc(Transition transition, Place place, int poids, boolean isZeroorVideur) {
+	//entrée 1 sortie 0
+	public void addArc(Transition transition, Place place, int poids,boolean entrsort, boolean isZeroorVideur) {
 		Arc arc= new Arc(poids,transition,place, isZeroorVideur);
 		this.liste_des_arcs.add(arc);
+		for(Transition T: this.liste_des_transitions) {
+			if(T.equals(transition)) {
+				if(entrsort) {
+					T.addArcEntrant(arc);
+				}
+				else {
+					T.addArcsortant(arc);
+				}
+			}
+		}
 	}
 	public void addArcZero(Transition transition, Place place) {
 		Arc arc= new ArcZero(transition, place, true);
 		this.liste_des_arcs.add(arc);
+		for(Transition T: this.liste_des_transitions) {
+			if(T.equals(transition)) {
+				
+				T.addArcEntrant(arc);
+				
+				
+			}
+		}
 	}
 	public void addArcVideur(Transition transition, Place place) {
 		Arc arc=new ArcVideur(transition,  place, true);
 		this.liste_des_arcs.add(arc);
+		for(Transition T: this.liste_des_transitions) {
+			if(T.equals(transition)) {
+				
+				T.addArcEntrant(arc);
+				
+				
+			}
+		}
 	}
 	public LinkedList<Arc> getArc() {
 		

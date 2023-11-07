@@ -154,7 +154,7 @@ public class PetriNetwork {
 	}
 	
 	
-	public void AfficherPetriNet() {
+	public String AfficherPetriNet() {
 		
 		String MessageFinal = "Réseau de Petri \n";
 		
@@ -270,11 +270,32 @@ public class PetriNetwork {
 		
 		MessageFinal += MessagePlace;
 		
-		System.out.println(MessageFinal);
+		return MessageFinal;
 		
 	}
 
-	public static void main(String[] args) {
+//	public static void main(String[] args) {
+//		PetriNetwork Petri= new PetriNetwork();
+//		Transition T1=  TransitionCree(Petri);
+//		Transition T2=  TransitionCree(Petri);
+//		Place P1= PlaceCree(5,Petri);
+//		Place P2= PlaceCree(0,Petri);
+//		Place P3= PlaceCree(1,Petri);
+//		Petri.addArc(T1, P1,4,true,false);
+//		Petri.addArcZero(T1, P2);
+//		Petri.addArcZero(T2, P3);
+//		
+////		Petri.AfficherPetriNet();
+//
+//		
+//		Petri.PasAll();
+//		
+//		
+//		System.out.println(Petri.AfficherPetriNet());
+//
+//	}
+	
+	public static void main(String[] args) {	
 		PetriNetwork Petri= new PetriNetwork();
 		Transition T1=  TransitionCree(Petri);
 		Transition T2=  TransitionCree(Petri);
@@ -285,15 +306,9 @@ public class PetriNetwork {
 		Petri.addArcZero(T1, P2);
 		Petri.addArcZero(T2, P3);
 		
-//		Petri.AfficherPetriNet();
+		System.out.println(Petri.AfficherPetriNet());
 
-		
-		Petri.PasAll();
-		
-		
-		Petri.AfficherPetriNet();
-
-	}
+}
 	
 	
 	

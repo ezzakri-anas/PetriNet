@@ -41,13 +41,7 @@ class PetriNetworkTest {
 	Arc arcCree(int poids, Transition transition, Place place,boolean entrsortie, boolean isVideurOrZero,PetriNetwork Petri) {
 		Arc arc= new Arc( poids,transition, place, isVideurOrZero);
 		Petri.addArc(transition, place, poids, entrsortie, isVideurOrZero);
-		if(entrsortie) {
-			transition.addArcEntrant(arc);
-		}
-		else
-		{
-			transition.addArcsortant(arc);
-		}
+		
 		return arc;
 		
 		
@@ -55,14 +49,14 @@ class PetriNetworkTest {
 	Arc arcVCree( Transition transition, Place place,PetriNetwork Petri) {
 		Arc arc= new ArcVideur(transition,place ,true);
 		Petri.addArcVideur(transition, place);
-		transition.addArcEntrant(arc);
+		
 		return arc;
 		
 	}
 	Arc arcZCree( Transition transition, Place place,PetriNetwork Petri) {
 		Arc arc= new ArcZero(transition,place ,true);
 		Petri.addArcZero(transition, place);
-		transition.addArcEntrant(arc);
+		
 		return arc;
 		
 	}

@@ -83,7 +83,7 @@ class PetriNetworkTest {
 	}
 	@Test
 	public void getTransitionListTest(){
-		PetriNetwork Petri= new PetriNetwork();
+		PetriNetwork Petri= this.PetriCree();
 		LinkedList<Transition> liste_des_transitions= new LinkedList<Transition>();
 		Petri.setTransitionList(liste_des_transitions);
 		assert(Petri.getTransitionList().equals(liste_des_transitions));

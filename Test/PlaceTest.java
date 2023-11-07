@@ -8,7 +8,11 @@ class PlaceTest {
 
 	@Test
 	void testPlace() {
-		assertNotNull(new Place(5));
+		Place p = new Place(5);
+		assertNotNull(p);
+		
+		Place p2 = new Place(-1);
+		assertEquals(p2.getNbreJetons(), 0);
 	}
 
 	@Test
@@ -22,6 +26,10 @@ class PlaceTest {
 		Place p = new Place(10);
 		p.setNbreJetons(7);
 		assertEquals(p.getNbreJetons(), 7);
+		
+		Place p2 = new Place(10);
+		p2.setNbreJetons(-1);
+		assertEquals(p2.getNbreJetons(), 0);
 	}
 
 	@Test
@@ -29,5 +37,9 @@ class PlaceTest {
 		Place p = new Place(10);
 		p.rmNbreJetons(7);
 		assertEquals(p.getNbreJetons(), 10 - 7);
+		
+		Place p2 = new Place(10);
+		p2.rmNbreJetons(11);
+		assertEquals(p2.getNbreJetons(), 0);
 	}
 }

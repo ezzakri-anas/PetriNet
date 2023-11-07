@@ -17,7 +17,21 @@ class ArcVideurTest {
 
 	@Test
 	void testFire() {
-		fail("Not yet implemented");
+		Transition t = new Transition(null, null);
+		Place p = new Place(1);
+		ArcVideur a = new ArcVideur(t, p, true);
+		
+		a.fire();
+		
+		assertEquals(p.getNbreJetons(), 0);
+		
+		Transition t2 = new Transition(null, null);
+		Place p2 = new Place(0);
+		ArcVideur a2 = new ArcVideur(t2, p2, true);
+		
+		a2.fire();
+		
+		assertEquals(p2.getNbreJetons(), 0);
 	}
 
 	@Test

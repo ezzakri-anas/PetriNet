@@ -18,8 +18,4 @@ public class ArcZero extends Arc{
 	public boolean isActive() {
 		return this.getPlace().getNbreJetons()==0;
 	}
-	
-	public void fire() {
-		
-	}
 }

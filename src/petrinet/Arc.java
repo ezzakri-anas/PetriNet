@@ -104,7 +104,5 @@ public class Arc {
 		return p.getNbreJetons() >= this.getPoids();
 	}
 
-	public void fire() {
-		
-	}
+	public void fire() {}
 }

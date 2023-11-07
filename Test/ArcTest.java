@@ -13,6 +13,10 @@ class ArcTest {
 		Transition t = new Transition(null, null);
 		Place p = new Place(1);
 		assertNotNull(new Arc(5, t, p, false));
+		
+		Transition t2 = new Transition(null, null);
+		Place p2 = new Place(1);
+		assertNotNull(new Arc(-5, t2, p2, false));
 	}
 
 	@Test
@@ -126,7 +130,7 @@ class ArcTest {
 		int jetons2 = 10;
 		Place p2 = new Place(jetons2);
 		int poids2 = 10;
-		Arc a2 = new Arc(poids2, t, p, false);
+		Arc a2 = new Arc(poids2, t2, p2, false);
 		
 		a.removeJetons();
 		assertEquals(p.getNbreJetons(), 0); // expected result 0
@@ -147,18 +151,29 @@ class ArcTest {
 		int jetons2 = 10;
 		Place p2 = new Place(jetons2);
 		int poids2 = 10;
-		Arc a2 = new Arc(poids2, t, p, false);
+		Arc a2 = new Arc(poids2, t2, p2, false);
 		
-		assertEquals(a.isActive(), true);
+		assertEquals(a2.isActive(), true);
 		
 		
 		Transition t3 = new Transition(null, null);
 		int jetons3 = 5;
 		Place p3 = new Place(jetons3);
 		int poids3 = 10;
-		Arc a3 = new Arc(poids3, t, p, false);
+		Arc a3 = new Arc(poids3, t3, p3, false);
 		
-		assertEquals(a.isActive(), true);
+		assertEquals(a3.isActive(), false);
+	}
+	
+	@Test
+	void testFire() {
+		Transition t = new Transition(null, null);
+		int jetons = 5;
+		Place p = new Place(jetons);
+		int poids = 10;
+		Arc a = new Arc(poids, t, p, false);
+		a.fire();
+		assertTrue(true);
 	}
 
 }

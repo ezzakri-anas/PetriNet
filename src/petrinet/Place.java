@@ -18,5 +18,6 @@ public class Place {
 		this.nbre_jetons -= rm <= this.getNbreJetons() ? rm : this.getNbreJetons();
 		
 	}
+	
 
 }

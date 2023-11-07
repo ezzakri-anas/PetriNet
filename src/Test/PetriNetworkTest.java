@@ -1,11 +1,11 @@
-package petrinet;
+package Test;
 
 
 import static org.junit.Assert.assertEquals;
 
 import java.util.LinkedList;
 
-
+import org.junit.Ignore;
 import org.junit.jupiter.api.Test;
 
 import petrinet.Arc;
@@ -22,6 +22,7 @@ class PetriNetworkTest {
 		
 		
 	}
+	@Ignore
 	Transition TransitionCree( PetriNetwork Petri) {
 		LinkedList<Arc> arcsEntrants= new LinkedList<Arc>() ;
 		LinkedList<Arc> arcsSortants= new LinkedList<Arc>() ;
@@ -31,6 +32,7 @@ class PetriNetworkTest {
 		
 		
 	}
+	@Ignore
 	Place PlaceCree(int poids,PetriNetwork Petri) {
 		
 		Place T1= new Place(poids);
@@ -38,6 +40,7 @@ class PetriNetworkTest {
 		return T1;
 		
 	}
+	@Ignore
 	Arc arcCree(int poids, Transition transition, Place place,boolean entrsortie, boolean isVideurOrZero,PetriNetwork Petri) {
 		Arc arc= new Arc( poids,transition, place, isVideurOrZero);
 		Petri.addArc(transition, place, poids, entrsortie, isVideurOrZero);
@@ -46,6 +49,7 @@ class PetriNetworkTest {
 		
 		
 	}
+	@Ignore
 	Arc arcVCree( Transition transition, Place place,PetriNetwork Petri) {
 		Arc arc= new ArcVideur(transition,place ,true);
 		Petri.addArcVideur(transition, place);
@@ -53,6 +57,8 @@ class PetriNetworkTest {
 		return arc;
 		
 	}
+	
+	@Ignore
 	Arc arcZCree( Transition transition, Place place,PetriNetwork Petri) {
 		Arc arc= new ArcZero(transition,place ,true);
 		Petri.addArcZero(transition, place);
@@ -147,7 +153,7 @@ class PetriNetworkTest {
 		Petri.setPlaceList(liste_des_Places);
 		LinkedList<Place> liste_des_Places2= new LinkedList<Place>();
 		liste_des_Places2.add(T1);
-		assert(Petri.getPlaceList().equals(liste_des_Places2));
+		assertEquals(Petri.getPlaceList(),liste_des_Places2);
 		
 		
 	}
@@ -156,53 +162,46 @@ class PetriNetworkTest {
 		
 		PetriNetwork Petri= this.PetriCree();
 		Place P1= this.PlaceCree(5,Petri);
-		Place P2= this.PlaceCree(6,Petri);
-		LinkedList<Place> liste_des_Places= new LinkedList<Place>();
-		Petri.setPlaceList(liste_des_Places);
+		Place P2= new Place(6);
+		Place P3= new Place(7);
+		
 		Petri.rmPlace(P1);
-		assert(Petri.getPlaceList().size()==0);
-		Petri.rmPlace(P1);
-		assert(Petri.getPlaceList().size()==1);
+		assertEquals(Petri.getPlaceList().size(),0);
+		Petri.rmPlace(P2);
+		Petri.rmPlace(P3);
+		assertEquals(Petri.getPlaceList().size(),0);
 	}
 	@Test
 	public void addArcTest() {
 		PetriNetwork Petri= this.PetriCree();
-		Transition T1= new Transition(arcsEntrants,arcsSortants);
-		Transition T2= new Transition(arcsEntrants,arcsSortants);
-		Petri.addTransition(T1);
-		Petri.addTransition(T2);
-		Place P1= new Place(5);
-		Place P2= new Place(5);
+		Transition T1= this.TransitionCree(Petri);
+		Transition T2= this.TransitionCree(Petri);
+		
+		Place P1= this.PlaceCree(5,Petri);
+		Place P2= this.PlaceCree(6,Petri);
 		Arc arc= new Arc(5,T1,P1, false);
 		Petri.addArc(T1, P1, 5,true, false);
 		Petri.addArc(T1, P2, 5,false, false);
-		assert(Petri.getArc().get(0).equals(arc));
+		assertEquals(Petri.getArc().get(0), arc);
 		
 		
 	}
 	public void addArcZeroTest() {
-		PetriNetwork Petri= new PetriNetwork();
+		PetriNetwork Petri=  this.PetriCree();
 		
-		LinkedList<Arc> arcsEntrants= new LinkedList<Arc>() ;
-		LinkedList<Arc> arcsSortants= new LinkedList<Arc>() ;
-		
-		Transition T1= new Transition(arcsEntrants,arcsSortants);
-		Transition T2= new Transition(arcsEntrants,arcsSortants);
+		Transition T1= this.TransitionCree(Petri);
+		Transition T2= this.TransitionCree(Petri);
 
-
-		Place P1= new Place(5);
+		Place P1= this.PlaceCree(5,Petri);
 		
 		Arc arc1= new ArcZero(T2,P1,true);
 		
+		this.arcVCree(T1,P1,Petri);
 		Petri.addArcZero(T2, P1);
-		T2.addArcEntrant(arc1);
-		Petri.addTransition(T1);
-		Petri.addTransition(T2);
-		Petri.addPlace(P1);
-		Arc arc= new ArcZero(T1,P1,true);
 		
-		Petri.addArcZero(T1, P1);
-		assert(Petri.getArc().get(1).equals(arc));
+		
+		
+		assert(Petri.getArc().contains(arc1));
 		
 		
 	}
@@ -231,7 +230,7 @@ class PetriNetworkTest {
 		Place P1= new Place(5);
 		Arc arc2= new Arc(5,T1,P1, false);
 		Petri.changeArcValue(arc2, 4);
-		assert(arc2.getPoids()==4);
+		assertEquals(arc2.getPoids(),4);
 		
 		
 	}
@@ -240,7 +239,7 @@ class PetriNetworkTest {
 		PetriNetwork Petri= new PetriNetwork();
 		Place P1= new Place(5);
 		Petri.setPlaceJeton(P1, 3);
-		assert(P1.getNbreJetons()==3);
+		assertEquals(P1.getNbreJetons(),3);
 		
 	}
 	@Test
@@ -253,46 +252,49 @@ class PetriNetworkTest {
 		Arc arc4= new Arc(8,T1,P1, true);
 		Arc arc5= new Arc(0,T1,P1, false);
 		Petri.addArc(T1, P1, 0,true, false);
-		Petri.getArc().add(arc5);
-		assert(Petri.isArcUnique(arc4));
-		assert(!Petri.isArcUnique(arc5));
+		assert(Petri.isArcUnique(arc5));
+		assert(!Petri.isArcUnique(arc4));
 		
 	}
 	@Test
 	public void PasTest() {
 		PetriNetwork Petri= new PetriNetwork();
-		LinkedList<Arc> arcsEntrants= new LinkedList<Arc>() ;
-		LinkedList<Arc> arcsSortants= new LinkedList<Arc>() ;
-		Transition T1= new Transition(arcsEntrants,arcsSortants);
-		Place P1= new Place(5);
-		Place P2= new Place(0);
-		Place P3= new Place(1);
-		Place P4= new Place(2);
+		
+		Transition T1= this.TransitionCree(Petri);
+		Place P1= this.PlaceCree(5,Petri);
+		Place P2= this.PlaceCree(0,Petri);
+		Place P3= this.PlaceCree(1,Petri);
+		Place P4= this.PlaceCree(2,Petri);
+		Place P5= this.PlaceCree(2,Petri);
 		Petri.addArc(T1, P1,4,true,false);
+		Petri.addArc(T1, P5,4,false,false);
 		Petri.addArcZero(T1, P2);
 		Petri.addArcVideur(T1, P3);
 		Petri.Pas(T1);
-		assert((P1.getNbreJetons()==1)&&(P2.getNbreJetons()==0)&&(P3.getNbreJetons()==0));
+		assertEquals(P1.getNbreJetons(),1);
+		assertEquals(P2.getNbreJetons(),0);
+		assertEquals(P3.getNbreJetons(),0);
 		Petri.addArc(T1, P4,4,true,false);
 		Petri.Pas(T1);
+		assertEquals(P4.getNbreJetons(),2);
 		
 		
 	}
 	@Test
 	public void PasAllTest() {
 		PetriNetwork Petri= new PetriNetwork();
-		LinkedList<Arc> arcsEntrants= new LinkedList<Arc>() ;
-		LinkedList<Arc> arcsSortants= new LinkedList<Arc>() ;
-		Transition T1= new Transition(arcsEntrants,arcsSortants);
-		Transition T2= new Transition(arcsEntrants,arcsSortants);
-		Place P1= new Place(5);
-		Place P2= new Place(0);
-		Place P3= new Place(1);
-		Petri.addArc(T1, P1,4,true,true);
+		Transition T1=  this.TransitionCree(Petri);
+		Transition T2=  this.TransitionCree(Petri);
+		Place P1= this.PlaceCree(5,Petri);
+		Place P2= this.PlaceCree(0,Petri);
+		Place P3= this.PlaceCree(1,Petri);
+		Petri.addArc(T1, P1,4,true,false);
 		Petri.addArcZero(T1, P2);
-		Petri.addArcVideur(T2, P3);
-		Petri.Pas(T1);
-		assert((P1.getNbreJetons()==1)&(P2.getNbreJetons()==0)&(P3.getNbreJetons()==0));
+		Petri.addArcZero(T2, P3);
+		Petri.PasAll();
+		assertEquals(P1.getNbreJetons(),1);
+		assertEquals(P2.getNbreJetons(),0);
+		assertEquals(P3.getNbreJetons(),1);
 		
 		
 	}

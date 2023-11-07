@@ -163,24 +163,27 @@ public class PetriNetwork {
 	
 	public void AfficherPetriNet() {
 		
-		System.out.println("Réseau de Petri \n");
+		String MessageFinal = "Réseau de Petri \n";
 		
 		int nbre_arcs = this.liste_des_arcs.size();
 		int nbre_transitions = this.liste_des_transitions.size();
 		int nbre_places = this.liste_des_places.size();
 		
-		System.out.println(nbre_places + " places");
-		System.out.println(nbre_transitions + " transitions");	
-		System.out.println(nbre_arcs + " arcs");	
+		MessageFinal += nbre_places + " places\n";
+		MessageFinal += nbre_transitions + " transitions\n";	
+		MessageFinal += nbre_arcs + " arcs\n";	
 		
-		System.out.println("\nListe des transitions");	
+
+		String MessageTransitions = "\nListe des transitions\n";
 		
 		for(int i=0; i<nbre_transitions; i++) {
 			Transition t = this.liste_des_transitions.get(i);
 			LinkedList<Arc> arcs_entrants = t.getArcsEntrants();
 			LinkedList<Arc> arcs_sortants = t.getArcsSortants();
-			System.out.println(i+1 + " : transition, " + arcs_entrants.size() + " arc(s) entrant(s), " + arcs_sortants.size() + " arc(s) sortant(s)");	
+			MessageTransitions += i+1 + " : transition, " + arcs_entrants.size() + " arc(s) entrant(s), " + arcs_sortants.size() + " arc(s) sortant(s)\n";	
 		}
+		
+		MessageFinal += MessageTransitions;
 		
 		Map<Object, Object> Arc_destination = new HashMap<>();
 		Map<Object, Object> Arc_source = new HashMap<>();
@@ -233,7 +236,7 @@ public class PetriNetwork {
 			}
 		}
 		
-		System.out.println("\nListe des arcs");	
+		String MessageArcs = "\nListe des arcs\n";	
 		
 		for(int i=0; i<nbre_arcs; i++) {
 			Arc arc = this.liste_des_arcs.get(i);
@@ -241,15 +244,18 @@ public class PetriNetwork {
 			Class<?> arc_class = arc.getClass();
 			
 			if(Arc_destination.get(arc) instanceof Place) {
-				System.out.println(i+1 + " : arc de type " + arc_class + " poids " + arc.getPoids() + 
-						" (place avec " + arc.getPlace().getNbreJetons() + " jetons vers transition)");	
+				MessageArcs += i+1 + " : arc de type " + arc_class + " poids " + arc.getPoids() + 
+						" (place avec " + arc.getPlace().getNbreJetons() + " jetons vers transition)\n";	
 			} else {
-				System.out.println(i+1 + " : arc de type " + arc_class + " poids " + arc.getPoids() + 
-						" (Transition vers place avec " + arc.getPlace().getNbreJetons() + " jetons)");	
+				MessageArcs += i+1 + " : arc de type " + arc_class + " poids " + arc.getPoids() + 
+						" (Transition vers place avec " + arc.getPlace().getNbreJetons() + " jetons)\n";	
 			}
 		}
 		
-		System.out.println("\nListe des places");	
+		MessageFinal += MessageArcs;
+		
+		
+		String MessagePlace = "\nListe des places\n";
 		
 		for(int i=0; i<nbre_places; i++) {
 			String message_arc_entrant = "";
@@ -266,9 +272,12 @@ public class PetriNetwork {
 				message_arc_sortant = " " + nbre_arc_sortant + " arcs sortants,";
 			}
 
-			System.out.println(i+1 + " : place avec " + place.getNbreJetons() + " jetons, " + message_arc_entrant + "," + message_arc_sortant);	
-
+			MessagePlace += i+1 + " : place avec " + place.getNbreJetons() + " jetons, " + message_arc_entrant + "," + message_arc_sortant +"\n";
 		}
+		
+		MessageFinal += MessagePlace;
+		
+		System.out.println(MessageFinal);
 		
 	}
 
@@ -283,7 +292,7 @@ public class PetriNetwork {
 		Petri.addArcZero(T1, P2);
 		Petri.addArcZero(T2, P3);
 		
-		Petri.AfficherPetriNet();
+//		Petri.AfficherPetriNet();
 
 		
 		Petri.PasAll();

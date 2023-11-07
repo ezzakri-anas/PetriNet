@@ -106,12 +106,5 @@ public class Arc {
 
 	public void fire() {}
 	
-	public boolean equals(Arc arc) {
-		if((this.place.equals(arc.place))&&(this.transition.equals(arc.place))&&(this.poids==arc.poids)) {
-			return true;
-					
-		}
-		return false;
-		
-	}
+
 }

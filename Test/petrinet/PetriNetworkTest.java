@@ -1,5 +1,4 @@
-package Test;
-
+package petrinet;
 
 import static org.junit.Assert.assertEquals;
 
@@ -7,13 +6,6 @@ import java.util.LinkedList;
 
 import org.junit.Ignore;
 import org.junit.jupiter.api.Test;
-
-import petrinet.Arc;
-import petrinet.ArcVideur;
-import petrinet.ArcZero;
-import petrinet.PetriNetwork;
-import petrinet.Place;
-import petrinet.Transition;
 
 class PetriNetworkTest {
 
@@ -77,7 +69,7 @@ class PetriNetworkTest {
 	}
 	
 	@Test
-	public void setTransitionListTest() {
+	void setTransitionListTest() {
 		PetriNetwork Petri= this.PetriCree();
 		Transition T1= this.TransitionCree(Petri);
 		Transition T2= this.TransitionCree(Petri);
@@ -88,14 +80,14 @@ class PetriNetworkTest {
 		assert(Petri.getTransitionList().equals(liste_des_transitions));
 	}
 	@Test
-	public void getTransitionListTest(){
+	void getTransitionListTest(){
 		PetriNetwork Petri= this.PetriCree();
 		LinkedList<Transition> liste_des_transitions= new LinkedList<Transition>();
 		Petri.setTransitionList(liste_des_transitions);
 		assert(Petri.getTransitionList().equals(liste_des_transitions));
 	}
 	@Test
-	public void setPlaceListTest() {
+	void setPlaceListTest() {
 		PetriNetwork Petri= this.PetriCree();
 		Place T1= this.PlaceCree(5,Petri);
 		Place T2= this.PlaceCree(1,Petri);
@@ -107,14 +99,14 @@ class PetriNetworkTest {
 		
 	}
 	@Test
-	public  void getPlaceListTest(){
+	void getPlaceListTest(){
 		PetriNetwork Petri= this.PetriCree();
 		LinkedList<Place> liste_des_Place= new LinkedList<Place>();
 		Petri.setPlaceList(liste_des_Place);
 		assert(Petri.getTransitionList().equals(liste_des_Place));
 	}
 	@Test
-	public void addTransitionTest()  {
+	void addTransitionTest()  {
 		PetriNetwork Petri= this.PetriCree();
 		
 		Transition T1= this.TransitionCree(Petri);
@@ -127,7 +119,7 @@ class PetriNetworkTest {
 	
 
 	@Test
-	public void rmTransitionTest() {
+	void rmTransitionTest() {
 		PetriNetwork Petri= this.PetriCree();
 		Place P1= this.PlaceCree(5,Petri);
 		Transition T1= this.TransitionCree(Petri);
@@ -146,7 +138,7 @@ class PetriNetworkTest {
 		
 	}
 	@Test
-	public void addPlaceTest() {
+	void addPlaceTest() {
 		PetriNetwork Petri= this.PetriCree();
 		Place T1= this.PlaceCree(5,Petri);
 		LinkedList<Place> liste_des_Places= new LinkedList<Place>();
@@ -158,7 +150,7 @@ class PetriNetworkTest {
 		
 	}
 	@Test
-	public void rmPlacetest()  {
+	void rmPlacetest()  {
 		
 		PetriNetwork Petri= this.PetriCree();
 		Place P1= this.PlaceCree(5,Petri);
@@ -172,7 +164,7 @@ class PetriNetworkTest {
 		assertEquals(Petri.getPlaceList().size(),0);
 	}
 	@Test
-	public void addArcTest() {
+	void addArcTest() {
 		PetriNetwork Petri= this.PetriCree();
 		Transition T1= this.TransitionCree(Petri);
 		Transition T2= this.TransitionCree(Petri);
@@ -186,7 +178,7 @@ class PetriNetworkTest {
 		
 		
 	}
-	public void addArcZeroTest() {
+	void addArcZeroTest() {
 		PetriNetwork Petri=  this.PetriCree();
 		
 		Transition T1= this.TransitionCree(Petri);
@@ -205,7 +197,7 @@ class PetriNetworkTest {
 		
 		
 	}
-	public void addArcVideurTest() {
+	void addArcVideurTest() {
 		PetriNetwork Petri= new PetriNetwork();
 		LinkedList<Arc> arcsEntrants= new LinkedList<Arc>() ;
 		LinkedList<Arc> arcsSortants= new LinkedList<Arc>() ;
@@ -222,7 +214,7 @@ class PetriNetworkTest {
 		
 	}
 	@Test
-	public void changeArcValueTest() {
+	void changeArcValueTest() {
 		PetriNetwork Petri= new PetriNetwork();
 		LinkedList<Arc> arcsEntrants= new LinkedList<Arc>() ;
 		LinkedList<Arc> arcsSortants= new LinkedList<Arc>() ;
@@ -235,7 +227,7 @@ class PetriNetworkTest {
 		
 	}
 	@Test
-	public void setPlaceJetonTest () {
+	void setPlaceJetonTest () {
 		PetriNetwork Petri= new PetriNetwork();
 		Place P1= new Place(5);
 		Petri.setPlaceJeton(P1, 3);
@@ -243,7 +235,7 @@ class PetriNetworkTest {
 		
 	}
 	@Test
-	public void isArcUniqueTest () {
+	void isArcUniqueTest () {
 		PetriNetwork Petri= new PetriNetwork();
 		LinkedList<Arc> arcsEntrants= new LinkedList<Arc>() ;
 		LinkedList<Arc> arcsSortants= new LinkedList<Arc>() ;
@@ -257,9 +249,9 @@ class PetriNetworkTest {
 		
 	}
 	@Test
-	public void PasTest() {
+	void PasTest() {
 		PetriNetwork Petri= new PetriNetwork();
-		
+		//RD4
 		Transition T1= this.TransitionCree(Petri);
 		Place P1= this.PlaceCree(5,Petri);
 		Place P2= this.PlaceCree(0,Petri);
@@ -277,11 +269,42 @@ class PetriNetworkTest {
 		Petri.addArc(T1, P4,4,true,false);
 		Petri.Pas(T1);
 		assertEquals(P4.getNbreJetons(),2);
+		//RD1
+		Transition T10= this.TransitionCree(Petri);
+		Place P10= this.PlaceCree(3,Petri);
+		Petri.addArc(T10, P10,2,true,false);
+		assertEquals(P10.getNbreJetons(),3);
+		Petri.Pas(T10);
+		assertEquals(P10.getNbreJetons(),1);
+		//RD2
+		Petri= new PetriNetwork();
+		Transition T11= this.TransitionCree(Petri);
+		Place P11= this.PlaceCree(1,Petri);
+		Petri.addArc(T10, P10,2,true,false);
+		assertEquals(P10.getNbreJetons(),1);
+		Petri.Pas(T10);
+		assertEquals(P10.getNbreJetons(),1);
+		
+		//RD3
+		Petri= new PetriNetwork();
+		Transition T12= this.TransitionCree(Petri);
+		Place P12= this.PlaceCree(4,Petri);
+		Place P13= this.PlaceCree(0,Petri);
+		Petri.addArc(T10, P12,2,true,false);
+		Petri.addArc(T10, P13,1,true,false);
+		assertEquals(P12.getNbreJetons(),1);
+		assertEquals(P13.getNbreJetons(),0);
+		Petri.Pas(T10);
+		assertEquals(P12.getNbreJetons(),1);
+		assertEquals(P13.getNbreJetons(),1);
+		
+		
+		
 		
 		
 	}
 	@Test
-	public void PasAllTest() {
+	void PasAllTest() {
 		PetriNetwork Petri= new PetriNetwork();
 		Transition T1=  this.TransitionCree(Petri);
 		Transition T2=  this.TransitionCree(Petri);
@@ -299,8 +322,10 @@ class PetriNetworkTest {
 		
 	}
 	
-	
-
+	@Test
+	void testAfficherPetriNet() {
+		
+	}
 	
 
 }

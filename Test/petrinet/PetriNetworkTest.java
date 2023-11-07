@@ -1,5 +1,4 @@
-package Test;
-
+package petrinet;
 
 import static org.junit.Assert.assertEquals;
 
@@ -7,13 +6,6 @@ import java.util.LinkedList;
 
 import org.junit.Ignore;
 import org.junit.jupiter.api.Test;
-
-import petrinet.Arc;
-import petrinet.ArcVideur;
-import petrinet.ArcZero;
-import petrinet.PetriNetwork;
-import petrinet.Place;
-import petrinet.Transition;
 
 class PetriNetworkTest {
 

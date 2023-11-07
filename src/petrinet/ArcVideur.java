@@ -23,4 +23,5 @@ public class ArcVideur extends Arc{
 		Place p = this.getPlace();
 		p.setNbreJetons(0);
 	}
+	
 }

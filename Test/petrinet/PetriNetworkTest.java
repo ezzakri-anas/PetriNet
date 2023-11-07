@@ -1,4 +1,4 @@
-package Test;
+package petrinet;
 
 
 import static org.junit.Assert.assertEquals;

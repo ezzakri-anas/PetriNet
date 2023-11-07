@@ -203,14 +203,24 @@ class PetriNetworkTest {
 	}
 	@Test
 	public void PasAllTest() {
+		PetriNetwork Petri= new PetriNetwork();
+		LinkedList<Arc> arcsEntrants= new LinkedList<Arc>() ;
+		LinkedList<Arc> arcsSortants= new LinkedList<Arc>() ;
+		Transition T1= new Transition(arcsEntrants,arcsSortants);
+		Transition T2= new Transition(arcsEntrants,arcsSortants);
+		Place P1= new Place(5);
+		Place P2= new Place(0);
+		Place P3= new Place(1);
+		Petri.addArc(T1, P1,4,true);
+		Petri.addArcZero(T1, P2);
+		Petri.addArcVideur(T2, P3);
+		Petri.Pas(T1);
+		assert((P1.getNbreJetons()==1)&(P2.getNbreJetons()==0)&(P3.getNbreJetons()==0));
 		
 		
 	}
 	
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-	}
+	
 
 	
 

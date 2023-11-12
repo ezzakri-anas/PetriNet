@@ -200,14 +200,9 @@ public class PetriNetwork {
 		
 	}
 	
-<<<<<<< HEAD
 	 // Affiche l'état actuel du réseau de Petri, incluant les informations sur les places, transitions et arcs.
     
 	public void AfficherPetriNet() {
-=======
-	
-	public String AfficherPetriNet() {
->>>>>>> 35baf08cef20f00926db5f6e5dad76682fd36422
 		
 		String MessageFinal = "Réseau de Petri \n";
 		
@@ -323,38 +318,12 @@ public class PetriNetwork {
 		
 		MessageFinal += MessagePlace;
 		
-		return MessageFinal;
+		System.out.println(MessageFinal);
 		
 	}
-<<<<<<< HEAD
 	// Méthode principale pour exécuter et tester le réseau de Petri. Crée un réseau, y ajoute des éléments et exécute des pas.
     
 	public static void main(String[] args) {
-=======
-
-//	public static void main(String[] args) {
-//		PetriNetwork Petri= new PetriNetwork();
-//		Transition T1=  TransitionCree(Petri);
-//		Transition T2=  TransitionCree(Petri);
-//		Place P1= PlaceCree(5,Petri);
-//		Place P2= PlaceCree(0,Petri);
-//		Place P3= PlaceCree(1,Petri);
-//		Petri.addArc(T1, P1,4,true,false);
-//		Petri.addArcZero(T1, P2);
-//		Petri.addArcZero(T2, P3);
-//		
-////		Petri.AfficherPetriNet();
-//
-//		
-//		Petri.PasAll();
-//		
-//		
-//		System.out.println(Petri.AfficherPetriNet());
-//
-//	}
-	
-	public static void main(String[] args) {	
->>>>>>> 35baf08cef20f00926db5f6e5dad76682fd36422
 		PetriNetwork Petri= new PetriNetwork();
 		Transition T1=  TransitionCree(Petri);
 		Transition T2=  TransitionCree(Petri);
@@ -365,13 +334,15 @@ public class PetriNetwork {
 		Petri.addArcZero(T1, P2);
 		Petri.addArcZero(T2, P3);
 		
-		System.out.println(Petri.AfficherPetriNet());
+//		Petri.AfficherPetriNet();
+
 		
 		Petri.PasAll();
 		
-		System.out.println(Petri.AfficherPetriNet());
+		
+		Petri.AfficherPetriNet();
 
-}
+	}
 	
 	
 	// Méthode utilitaire pour créer une nouvelle transition, l'ajouter au réseau et la retourner.

@@ -6,16 +6,19 @@ import java.util.LinkedList;
 
 import org.junit.Ignore;
 import org.junit.jupiter.api.Test;
+//Classe de test pour PetriNetwork, utilisant JUnit pour effectuer des tests unitaires.
 
 class PetriNetworkTest {
-
+	 // Crée une instance de PetriNetwork pour les tests.
+    
 	PetriNetwork PetriCree() {
 		return new PetriNetwork() ;
 		
 		
 	}
 	@Ignore
-	Transition TransitionCree( PetriNetwork Petri) {
+	// Crée une transition pour les tests. @Ignore indique que cette méthode est ignorée lors des tests unitaires.
+    Transition TransitionCree( PetriNetwork Petri) {
 		LinkedList<Arc> arcsEntrants= new LinkedList<Arc>() ;
 		LinkedList<Arc> arcsSortants= new LinkedList<Arc>() ;
 		Transition T1= new Transition(arcsEntrants,arcsSortants);
@@ -25,15 +28,19 @@ class PetriNetworkTest {
 		
 	}
 	@Ignore
-	Place PlaceCree(int poids,PetriNetwork Petri) {
+	// Crée une place pour les tests. @Ignore indique que cette méthode est ignorée lors des tests unitaires.
+    Place PlaceCree(int poids,PetriNetwork Petri) {
 		
 		Place T1= new Place(poids);
 		Petri.addPlace(T1);
 		return T1;
 		
 	}
+	// Crée un arc pour les tests. @Ignore indique que cette méthode est ignorée lors des tests unitaires.
+    
 	@Ignore
-	Arc arcCree(int poids, Transition transition, Place place,boolean entrsortie, boolean isVideurOrZero,PetriNetwork Petri) {
+	
+    Arc arcCree(int poids, Transition transition, Place place,boolean entrsortie, boolean isVideurOrZero,PetriNetwork Petri) {
 		Arc arc= new Arc( poids,transition, place, isVideurOrZero);
 		Petri.addArc(transition, place, poids, entrsortie, isVideurOrZero);
 		
@@ -42,6 +49,8 @@ class PetriNetworkTest {
 		
 	}
 	@Ignore
+	// Crée un ArcVideur pour les tests. @Ignore indique que cette méthode est ignorée lors des tests unitaires.
+    
 	Arc arcVCree( Transition transition, Place place,PetriNetwork Petri) {
 		Arc arc= new ArcVideur(transition,place ,true);
 		Petri.addArcVideur(transition, place);
@@ -49,7 +58,8 @@ class PetriNetworkTest {
 		return arc;
 		
 	}
-	
+	// Crée un ArcZero pour les tests. @Ignore indique que cette méthode est ignorée lors des tests unitaires.
+    
 	@Ignore
 	Arc arcZCree( Transition transition, Place place,PetriNetwork Petri) {
 		Arc arc= new ArcZero(transition,place ,true);
@@ -59,7 +69,8 @@ class PetriNetworkTest {
 		
 	}
 	@Test
-	void PetriNetworktest() {
+	// Test pour vérifier l'initialisation correcte d'un PetriNetwork.
+    void PetriNetworktest() {
 		PetriNetwork Petri= this.PetriCree() ;
 		assert(Petri.getPlaceList().size()==0);
 		assert(Petri.getTransitionList().size()==0);
@@ -67,7 +78,8 @@ class PetriNetworkTest {
 		
 		
 	}
-	
+	// Test pour vérifier le fonctionnement de setTransitionList.
+    
 	@Test
 	void setTransitionListTest() {
 		PetriNetwork Petri= this.PetriCree();
@@ -80,14 +92,16 @@ class PetriNetworkTest {
 		assert(Petri.getTransitionList().equals(liste_des_transitions));
 	}
 	@Test
-	void getTransitionListTest(){
+	// Test pour vérifier que getTransitionList retourne bien la liste actuelle des transitions.
+    void getTransitionListTest(){
 		PetriNetwork Petri= this.PetriCree();
 		LinkedList<Transition> liste_des_transitions= new LinkedList<Transition>();
 		Petri.setTransitionList(liste_des_transitions);
 		assert(Petri.getTransitionList().equals(liste_des_transitions));
 	}
 	@Test
-	void setPlaceListTest() {
+	// Test pour vérifier que setPlaceList met à jour correctement la liste des places.
+    void setPlaceListTest() {
 		PetriNetwork Petri= this.PetriCree();
 		Place T1= this.PlaceCree(5,Petri);
 		Place T2= this.PlaceCree(1,Petri);
@@ -98,6 +112,8 @@ class PetriNetworkTest {
 		assert(Petri.getPlaceList().equals(liste_des_Place));
 		
 	}
+	// Test pour vérifier que getPlaceList retourne bien la liste actuelle des places.
+    
 	@Test
 	void getPlaceListTest(){
 		PetriNetwork Petri= this.PetriCree();
@@ -106,7 +122,8 @@ class PetriNetworkTest {
 		assert(Petri.getTransitionList().equals(liste_des_Place));
 	}
 	@Test
-	void addTransitionTest()  {
+	// Test pour vérifier que la méthode addTransition ajoute correctement une transition à PetriNetwork.
+    void addTransitionTest()  {
 		PetriNetwork Petri= this.PetriCree();
 		
 		Transition T1= this.TransitionCree(Petri);
@@ -117,7 +134,8 @@ class PetriNetworkTest {
 		
 	}
 	
-
+	// Test pour vérifier que la méthode rmTransition supprime correctement une transition de PetriNetwork.
+    
 	@Test
 	void rmTransitionTest() {
 		PetriNetwork Petri= this.PetriCree();
@@ -138,7 +156,8 @@ class PetriNetworkTest {
 		
 	}
 	@Test
-	void addPlaceTest() {
+	// Test pour vérifier que la méthode addPlace ajoute correctement une place à PetriNetwork.
+    void addPlaceTest() {
 		PetriNetwork Petri= this.PetriCree();
 		Place T1= this.PlaceCree(5,Petri);
 		LinkedList<Place> liste_des_Places= new LinkedList<Place>();
@@ -150,7 +169,8 @@ class PetriNetworkTest {
 		
 	}
 	@Test
-	void rmPlacetest()  {
+	// Test pour vérifier que la méthode rmPlace supprime correctement une place de PetriNetwork.
+    void rmPlacetest()  {
 		
 		PetriNetwork Petri= this.PetriCree();
 		Place P1= this.PlaceCree(5,Petri);
@@ -164,7 +184,8 @@ class PetriNetworkTest {
 		assertEquals(Petri.getPlaceList().size(),0);
 	}
 	@Test
-	void addArcTest() {
+	// Test pour vérifier que la méthode addArc ajoute correctement un arc à PetriNetwork.
+    void addArcTest() {
 		PetriNetwork Petri= this.PetriCree();
 		Transition T1= this.TransitionCree(Petri);
 		Transition T2= this.TransitionCree(Petri);
@@ -178,6 +199,8 @@ class PetriNetworkTest {
 		
 		
 	}
+	// Test pour vérifier que la méthode addArcZero ajoute correctement un ArcZero à PetriNetwork.
+	@Test
 	void addArcZeroTest() {
 		PetriNetwork Petri=  this.PetriCree();
 		
@@ -197,6 +220,8 @@ class PetriNetworkTest {
 		
 		
 	}
+	// Test pour vérifier que la méthode addArcVideur ajoute correctement un ArcVideur à PetriNetwork.
+	@Test
 	void addArcVideurTest() {
 		PetriNetwork Petri= new PetriNetwork();
 		LinkedList<Arc> arcsEntrants= new LinkedList<Arc>() ;
@@ -213,6 +238,8 @@ class PetriNetworkTest {
 		
 		
 	}
+	// Test pour vérifier que la méthode changeArcValue change correctement le poids d'un arc dans PetriNetwork.
+	   
 	@Test
 	void changeArcValueTest() {
 		PetriNetwork Petri= new PetriNetwork();
@@ -226,6 +253,8 @@ class PetriNetworkTest {
 		
 		
 	}
+	// Test pour vérifier que la méthode setPlaceJeton modifie correctement le nombre de jetons d'une place dans PetriNetwork.
+    
 	@Test
 	void setPlaceJetonTest () {
 		PetriNetwork Petri= new PetriNetwork();
@@ -234,6 +263,8 @@ class PetriNetworkTest {
 		assertEquals(P1.getNbreJetons(),3);
 		
 	}
+	 // Test pour vérifier que la méthode isArcUnique détermine correctement si un arc est unique dans PetriNetwork.
+    
 	@Test
 	void isArcUniqueTest () {
 		PetriNetwork Petri= new PetriNetwork();

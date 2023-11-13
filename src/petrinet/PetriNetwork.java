@@ -3,83 +3,95 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 
-
-//Classe principale représentant un réseau de 
-	//Petri, contenant des places, transitions et arcs.
+/**
+ * Classe principale représentant un réseau de Petri, contenant des places, transitions et arcs.
+ */
 public class PetriNetwork {
-	private LinkedList<Arc> liste_des_arcs;
-	private LinkedList<Transition> liste_des_transitions;
-	private LinkedList<Place> liste_des_places;
-	
-	
-	// Constructeur de la classe PetriNetwork. Initialise les 
-	//listes pour les arcs, transitions et places.
-	public PetriNetwork() {
-		this.liste_des_arcs= new LinkedList<Arc>();
-		this.liste_des_transitions= new LinkedList<Transition>();
-		this.liste_des_places=new LinkedList<Place>();
-	}
-	
-	// Méthode pour définir la liste des transitions dans le réseau.
-	//Prend en paramètre une liste de transitions.
+    private LinkedList<Arc> liste_des_arcs;
+    private LinkedList<Transition> liste_des_transitions;
+    private LinkedList<Place> liste_des_places;
     
-	public void setTransitionList(LinkedList<Transition> Transitions) {
-		this.liste_des_transitions=Transitions;
-	}
-	// Méthode pour obtenir la liste actuelle des transitions 
-	//dans le réseau.
+    /**
+     * Constructeur de la classe PetriNetwork. Initialise les listes pour les arcs, transitions et places.
+     */
+    public PetriNetwork() {
+        this.liste_des_arcs= new LinkedList<Arc>();
+        this.liste_des_transitions= new LinkedList<Transition>();
+        this.liste_des_places=new LinkedList<Place>();
+    }
     
-	public LinkedList<Transition> getTransitionList(){
-		return this.liste_des_transitions;
-	}
-	// Méthode pour définir la liste des places dans le réseau. Prend en paramètre une liste de places.
-    
-	public void setPlaceList(LinkedList<Place> Places) {
-		this.liste_des_places=Places;
-		
-	}
-	// Méthode pour obtenir la liste actuelle des places dans le réseau.
-    
-	public LinkedList<Place>  getPlaceList(){
-		return this.liste_des_places;
-	}
-	// Ajoute une transition spécifique au réseau. Prend en paramètre un objet Transition.
-    
-	public void addTransition(Transition transition)  {
-		this.liste_des_transitions.add(transition);
-		
-	}
-	// Supprime une transition spécifique du réseau. Recherche et supprime la transition correspondante.
-    
-	public void rmTransition(Transition transition) {
-		for (Transition transitions : this.getTransitionList()) {
-			if (transitions.equals(transition)) {
-				this.liste_des_transitions.remove(transition);
-				
-			}
-		}
-		
-	}
-	// Ajoute une place spécifique au réseau. Prend en paramètre un objet Place.
-    
-	public void addPlace(Place place) {
-		this.liste_des_places.add(place);
-		
-	}
-	 // Supprime une place spécifique du réseau. Recherche et supprime la place correspondante.
-    
-	public void rmPlace(Place place)  {
-		for (Place P : this.liste_des_places) {
-			if (P.equals(place)) {
-				this.liste_des_places.remove(place);
-				
-			}
-		}
-		
-	}
-	// Ajoute un arc au réseau. Prend plusieurs paramètres pour spécifier la transition, la place, le poids et le type de l'arc.
-    
-	//entrée 1 sortie 0
+    /**
+     * Définit la liste des transitions dans le réseau.
+     * @param Transitions Liste des transitions à définir.
+     */
+    public void setTransitionList(LinkedList<Transition> Transitions) {
+        this.liste_des_transitions=Transitions;
+    }
+
+    /**
+     * Obtient la liste actuelle des transitions dans le réseau.
+     * @return La liste des transitions.
+     */
+    public LinkedList<Transition> getTransitionList(){
+        return this.liste_des_transitions;
+    }
+
+    /**
+     * Définit la liste des places dans le réseau.
+     * @param Places Liste des places à définir.
+     */
+    public void setPlaceList(LinkedList<Place> Places) {
+        this.liste_des_places=Places;
+    }
+
+    /**
+     * Obtient la liste actuelle des places dans le réseau.
+     * @return La liste des places.
+     */
+    public LinkedList<Place> getPlaceList(){
+        return this.liste_des_places;
+    }
+
+    /**
+     * Ajoute une transition spécifique au réseau.
+     * @param transition Transition à ajouter.
+     */
+    public void addTransition(Transition transition) {
+        this.liste_des_transitions.add(transition);
+    }
+
+    /**
+     * Supprime une transition spécifique du réseau.
+     * @param transition Transition à supprimer.
+     */
+    public void rmTransition(Transition transition) {
+        this.liste_des_transitions.removeIf(transitions -> transitions.equals(transition));
+    }
+
+    /**
+     * Ajoute une place spécifique au réseau.
+     * @param place Place à ajouter.
+     */
+    public void addPlace(Place place) {
+        this.liste_des_places.add(place);
+    }
+
+    /**
+     * Supprime une place spécifique du réseau.
+     * @param place Place à supprimer.
+     */
+    public void rmPlace(Place place) {
+        this.liste_des_places.removeIf(p -> p.equals(place));
+    }
+
+    /**
+     * Ajoute un arc au réseau avec les paramètres spécifiés.
+     * @param transition Transition associée à l'arc.
+     * @param place Place associée à l'arc.
+     * @param poids Poids de l'arc.
+     * @param entrsort Booléen indiquant si l'arc est entrant ou sortant.
+     * @param isZeroorVideur Booléen indiquant si l'arc est de type ArcZero ou ArcVideur.
+     */
 	public void addArc(Transition transition, Place place, int poids,boolean entrsort, boolean isZeroorVideur) {
 		Arc arc= new Arc(poids,transition,place, isZeroorVideur);
 		if (this.isArcUnique(arc)) {
@@ -97,8 +109,11 @@ public class PetriNetwork {
 		}
 		
 	}
-	// Ajoute un ArcZero au réseau. Un ArcZero est un type spécial d'arc avec des règles de tirage spécifiques.
-    
+	/**
+     * Ajoute un ArcZero au réseau, qui est un type spécial d'arc avec des règles de tirage spécifiques.
+     * @param transition Transition associée à l'arc.
+     * @param place Place associée à l'arc.
+     */
 	public void addArcZero(Transition transition, Place place) {
 		Arc arc= new ArcZero(transition, place, true);
 		if (this.isArcUnique(arc)) {
@@ -113,8 +128,11 @@ public class PetriNetwork {
 		}
 	}
 	}
-	// Ajoute un ArcVideur au réseau. Un ArcVideur est un type spécial d'arc qui vide entièrement la place de ses jetons lorsqu'il est tiré.
-    
+	/**
+     * Ajoute un ArcVideur au réseau, un type spécial d'arc qui vide entièrement la place de ses jetons lorsqu'il est tiré.
+     * @param transition Transition associée à l'arc.
+     * @param place Place associée à l'arc.
+     */
 	public void addArcVideur(Transition transition, Place place) {
 		Arc arc=new ArcVideur(transition,  place, true);
 		if (this.isArcUnique(arc)) {
@@ -129,26 +147,37 @@ public class PetriNetwork {
 		}
 	}
 	}
-	// Ajoute un ArcVideur au réseau. Un ArcVideur est un type spécial d'arc qui vide entièrement la place de ses jetons lorsqu'il est tiré.
-    
+	/**
+     * Retourne la liste des arcs présents dans le réseau.
+     * @return La liste des arcs.
+     */
 	public LinkedList<Arc> getArc() {
 		
 		return this.liste_des_arcs;
 	}
-	 // Modifie la valeur d'un arc spécifique. Utile pour changer le poids d'un arc après sa création.
-    
+	/**
+     * Modifie le poids d'un arc spécifique.
+     * @param arc Arc dont le poids doit être modifié.
+     * @param poids Nouveau poids de l'arc.
+     */
 	public void changeArcValue (Arc arc, int poids) {
 		arc.setPoids(poids);
 		
 	}
-	// Définit le nombre de jetons pour une place donnée. Cette méthode est utilisée pour initialiser ou modifier l'état d'une place.
-    
+	/**
+     * Définit le nombre de jetons pour une place donnée.
+     * @param place Place pour laquelle modifier le nombre de jetons.
+     * @param nbrejetons Nouveau nombre de jetons pour la place.
+     */
 	public void setPlaceJeton (Place place, int nbrejetons) {
 		place.setNbreJetons(nbrejetons);
 		
 	}
-	// Vérifie si un arc donné est unique dans le réseau. Cette méthode assure qu'il n'y a pas de doublons d'arcs.
-    
+	/**
+     * Vérifie si un arc est unique dans le réseau.
+     * @param arc Arc à vérifier.
+     * @return Booléen indiquant si l'arc est unique.
+     */
 	public boolean isArcUnique (Arc arc) {
 		for (Arc arc_transitions : this.liste_des_arcs) {
 			if (arc_transitions.equals(arc)) {
@@ -159,8 +188,10 @@ public class PetriNetwork {
 		return true;
 		
 	}
-	 // Méthode pour exécuter un pas (tirage) sur une transition donnée. Vérifie si la transition est tirable et met à jour l'état du réseau en conséquence.
-    
+	/**
+     * Exécute un pas (tirage) sur une transition donnée.
+     * @param T Transition sur laquelle effectuer le pas.
+     */
 	public void Pas(Transition T) {
 		//on verifie d abrd que c est titable
 		
@@ -191,8 +222,9 @@ public class PetriNetwork {
 		
 		
 	}
-	// Exécute un pas (tirage) sur toutes les transitions du réseau. Cette méthode permet de simuler l'avancement du réseau de Petri.
-    
+	/**
+     * Exécute un pas (tirage) sur toutes les transitions du réseau.
+     */
 	public void PasAll() {
 		for (Transition T : this.liste_des_transitions) {
 			this.Pas(T);
@@ -200,8 +232,9 @@ public class PetriNetwork {
 		
 	}
 	
-	 // Affiche l'état actuel du réseau de Petri, incluant les informations sur les places, transitions et arcs.
-    
+	/**
+     * Affiche l'état actuel du réseau de Petri, y compris les informations sur les places, transitions et arcs.
+     */
 	public void AfficherPetriNet() {
 		
 		String MessageFinal = "Réseau de Petri \n";
@@ -345,8 +378,11 @@ public class PetriNetwork {
 	}
 	
 	
-	// Méthode utilitaire pour créer une nouvelle transition, l'ajouter au réseau et la retourner.
-    
+	/**
+     * Méthode utilitaire pour créer et ajouter une nouvelle transition au réseau.
+     * @param Petri Réseau de Petri auquel la transition sera ajoutée.
+     * @return La transition créée et ajoutée au réseau.
+     */
 	public static Transition TransitionCree( PetriNetwork Petri) {
 		LinkedList<Arc> arcsEntrants= new LinkedList<Arc>() ;
 		LinkedList<Arc> arcsSortants= new LinkedList<Arc>() ;
@@ -356,8 +392,12 @@ public class PetriNetwork {
 		
 		
 	}
-	// Méthode utilitaire pour créer une nouvelle place, l'ajouter au réseau et la retourner.
-    
+	/**
+     * Méthode utilitaire pour créer et ajouter une nouvelle place au réseau.
+     * @param poids Nombre initial de jetons dans la place.
+     * @param Petri Réseau de Petri auquel la place sera ajoutée.
+     * @return La place créée et ajoutée au réseau.
+     */
 	public static Place PlaceCree(int poids,PetriNetwork Petri) {
 		
 		Place T1= new Place(poids);
@@ -365,8 +405,16 @@ public class PetriNetwork {
 		return T1;
 		
 	}
-	// Méthode utilitaire pour créer un nouveau arc, l'ajouter au réseau et le retourner. Prend en paramètres les détails de l'arc.
-    
+	/**
+     * Méthode utilitaire pour créer et ajouter un nouvel arc au réseau.
+     * @param poids Poids de l'arc à créer.
+     * @param transition Transition associée à l'arc.
+     * @param place Place associée à l'arc.
+     * @param entrsortie Booléen indiquant si l'arc est entrant ou sortant.
+     * @param isVideurOrZero Booléen indiquant si l'arc est de type ArcZero ou ArcVideur.
+     * @param Petri Réseau de Petri auquel l'arc sera ajouté.
+     * @return L'arc créé et ajouté au réseau.
+     */
 	public static Arc arcCree(int poids, Transition transition, Place place,boolean entrsortie, boolean isVideurOrZero,PetriNetwork Petri) {
 		Arc arc= new Arc( poids,transition, place, isVideurOrZero);
 		Petri.addArc(transition, place, poids, entrsortie, isVideurOrZero);
@@ -375,8 +423,13 @@ public class PetriNetwork {
 		
 		
 	}
-	 // Méthode utilitaire pour créer un ArcVideur, l'ajouter au réseau et le retourner.
-    
+	/**
+     * Méthode utilitaire pour créer et ajouter un ArcVideur au réseau.
+     * @param transition Transition associée à l'ArcVideur.
+     * @param place Place associée à l'ArcVideur.
+     * @param Petri Réseau de Petri auquel l'ArcVideur sera ajouté.
+     * @return L'ArcVideur créé et ajouté au réseau.
+     */
 	public static Arc arcVCree( Transition transition, Place place,PetriNetwork Petri) {
 		Arc arc= new ArcVideur(transition,place ,true);
 		Petri.addArcVideur(transition, place);
@@ -384,8 +437,13 @@ public class PetriNetwork {
 		return arc;
 		
 	}
-	// Méthode utilitaire pour créer un ArcZero, l'ajouter au réseau et le retourner.
-    
+	/**
+     * Méthode utilitaire pour créer et ajouter un ArcZero au réseau.
+     * @param transition Transition associée à l'ArcZero.
+     * @param place Place associée à l'ArcZero.
+     * @param Petri Réseau de Petri auquel l'ArcZero sera ajouté.
+     * @return L'ArcZero créé et ajouté au réseau.
+     */
 	public static Arc arcZCree( Transition transition, Place place,PetriNetwork Petri) {
 		Arc arc= new ArcZero(transition,place ,true);
 		Petri.addArcZero(transition, place);

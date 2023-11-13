@@ -1,0 +1,56 @@
+README pour le Réseau de Petri 
+==============================
+
+INTRODUCTION
+------------
+Ce projet implémente un simulateur de réseau de Petri en Java, destiné à modéliser des systèmes à événements discrets. Il comprend des classes pour les places, les transitions, et différents types d'arcs, et est adapté à l'enseignement et à la recherche dans des domaines comme l'automatisation et la recherche opérationnelle.
+
+CONFIGURATION REQUISE
+---------------------
+- Java Development Kit (JDK) : Version 8 ou supérieure.
+- Environnement de développement intégré (IDE) :  Eclipse, ou autres.
+- JUnit 5 : Pour exécuter les tests unitaires.
+
+INSTALLATION
+------------
+1. Clonage du dépôt : Utilisez `git clone [URL]` pour cloner le dépôt du projet.
+2. Configuration de l'IDE :
+   - Ouvrez le dossier du projet dans votre IDE.
+   - Assurez-vous que le JDK est configuré correctement.
+   - Configurez JUnit 5 si nécessaire.
+
+EXÉCUTION DU CODE
+-----------------
+1. Ouvrez la classe `PetriNetwork.java` dans votre IDE.
+2. Utilisez les fonctionnalités de l'IDE pour exécuter le programme.
+	- Vous pouvez créer créer à l aide des contructeur des classes et utiliser la fonction ShowPetriNet qui montre bien le bon fonctionnement du reseau Pétri.(Regarder le fichier test)
+
+EXÉCUTION DES TESTS
+-------------------
+1. Naviguez vers le dossier `test` dans votre projet.
+2. Sélectionnez les tests à exécuter et utilisez les commandes de l'IDE pour les lancer.(verifier les tests avec JUnit: clique droit sur le fichier de la classe / coverage as / Junit)
+
+MODÈLES DE CONCEPTION ET ARCHITECTURE
+-------------------------------------
+- Héritage et polymorphisme : Utilisés dans les classes `ArcZero` et `ArcVideur`.
+- Encapsulation : Chaque composant est encapsulé dans sa propre classe.
+- Modularité : Le projet est divisé en modules clairement définis.
+
+JUSTIFICATION DES AJUSTEMENTS APPORTES AUX DIFFERENTS CLASSES
+-------------------------------------------------------------
+1. Le nom des méthodes a été changer afin de rester coherents et utiliser qu'une seul langue, nous avons remarqué que certeines methodes étaient en francais et d'autres en anglais, on a décider de les garder en anglais vu que java comprend mieux l'anglais. Cependant, nous avons préféré garder les commentaires en francais vu vu que ce code a plus de chance d'etre lu par un public francais.
+2. Ajout de nouvelles méthodes dans les classes suivantes:
+	- Arc:
+	- ArcVideur:
+	- ArcZero:
+	- PetriNetwork:
+	- Place: 
+	- Transition:
+
+CONTRIBUTEURS
+-------------
+- LAGSSAIBI Adam
+- EZZAKRI Anas
+
+
+

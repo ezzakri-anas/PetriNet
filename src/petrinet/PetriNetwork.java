@@ -358,11 +358,11 @@ public class PetriNetwork {
 
 	public static void main(String[] args) {
 		PetriNetwork Petri= new PetriNetwork();
-		Transition T1=  TransitionCree(Petri);
-		Transition T2=  TransitionCree(Petri);
-		Place P1= PlaceCree(5,Petri);
-		Place P2= PlaceCree(0,Petri);
-		Place P3= PlaceCree(1,Petri);
+		Transition T1=  create_transition_for_test(Petri);
+		Transition T2=  create_transition_for_test(Petri);
+		Place P1= create_place_for_test(5,Petri);
+		Place P2= create_place_for_test(0,Petri);
+		Place P3= create_place_for_test(1,Petri);
 		Petri.addArc(T1, P1,4,true,false);
 		Petri.addArcZero(T1, P2);
 		Petri.addArcZero(T2, P3);
@@ -383,7 +383,7 @@ public class PetriNetwork {
 	 * @param Petri Réseau de Petri auquel la transition sera ajoutée.
 	 * @return La transition créée et ajoutée au réseau.
 	 */
-	public static Transition TransitionCree( PetriNetwork Petri) {
+	public static Transition create_transition_for_test( PetriNetwork Petri) {
 		LinkedList<Arc> arcsEntrants= new LinkedList<Arc>() ;
 		LinkedList<Arc> arcsSortants= new LinkedList<Arc>() ;
 		Transition T1= new Transition(arcsEntrants,arcsSortants);
@@ -398,7 +398,7 @@ public class PetriNetwork {
 	 * @param Petri Réseau de Petri auquel la place sera ajoutée.
 	 * @return La place créée et ajoutée au réseau.
 	 */
-	public static Place PlaceCree(int poids,PetriNetwork Petri) {
+	public static Place create_place_for_test(int poids,PetriNetwork Petri) {
 
 		Place T1= new Place(poids);
 		Petri.addPlace(T1);
@@ -415,7 +415,7 @@ public class PetriNetwork {
 	 * @param Petri Réseau de Petri auquel l'arc sera ajouté.
 	 * @return L'arc créé et ajouté au réseau.
 	 */
-	public static Arc arcCree(int poids, Transition transition, Place place,boolean entrsortie, boolean isVideurOrZero,PetriNetwork Petri) {
+	public static Arc create_arc_for_test(int poids, Transition transition, Place place,boolean entrsortie, boolean isVideurOrZero,PetriNetwork Petri) {
 		Arc arc= new Arc( poids,transition, place, isVideurOrZero);
 		Petri.addArc(transition, place, poids, entrsortie, isVideurOrZero);
 
@@ -430,7 +430,7 @@ public class PetriNetwork {
 	 * @param Petri Réseau de Petri auquel l'ArcVideur sera ajouté.
 	 * @return L'ArcVideur créé et ajouté au réseau.
 	 */
-	public static Arc arcVCree( Transition transition, Place place,PetriNetwork Petri) {
+	public static Arc create_arc_videur_for_test( Transition transition, Place place,PetriNetwork Petri) {
 		Arc arc= new ArcVideur(transition,place ,true);
 		Petri.addArcVideur(transition, place);
 
@@ -444,7 +444,7 @@ public class PetriNetwork {
 	 * @param Petri Réseau de Petri auquel l'ArcZero sera ajouté.
 	 * @return L'ArcZero créé et ajouté au réseau.
 	 */
-	public static Arc arcZCree( Transition transition, Place place,PetriNetwork Petri) {
+	public static Arc create_arc_zero_for_test( Transition transition, Place place,PetriNetwork Petri) {
 		Arc arc= new ArcZero(transition,place ,true);
 		Petri.addArcZero(transition, place);
 

@@ -48,7 +48,7 @@ class PlaceTest {
 		int tokens21 = 10;
 		Place p2 = new Place(tokens21);
 		
-		int tokens22 = 7;
+		int tokens22 = -7;
 		p2.setTokenNbre(tokens22);
 		assertEquals(p2.getTokenNbre(), 0);// Le nombre de jetons doit être ramené à 0.
 
@@ -68,8 +68,8 @@ class PlaceTest {
 		int tokens2 = 10;
 		Place p2 = new Place(tokens2);
 		int to_remove2 = 11;
-		p.removeTokenNbre(to_remove2);
-		assertEquals(p.getTokenNbre(), tokens2 - to_remove2);// Tous les jetons doivent être retirés dans ce cas.
+		p2.removeTokenNbre(to_remove2);
+		assertEquals(p2.getTokenNbre(), 0);// Tous les jetons doivent être retirés dans ce cas.
 
 	}
 }

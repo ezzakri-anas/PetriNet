@@ -21,7 +21,7 @@ public class Place {
 	 * @return Le nombre de jetons dans la place.
 	 */
 	public int getTokenNbre() {
-		return tokenNbre;
+		return this.tokenNbre;
 	}
 
 	/**

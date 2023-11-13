@@ -38,13 +38,13 @@ MODÈLES DE CONCEPTION ET ARCHITECTURE
 
 JUSTIFICATION DES AJUSTEMENTS APPORTES AUX DIFFERENTS CLASSES PAR RAPPORT AU DIAGRAMME DE CLASSE
 ------------------------------------------------------------------------------------------------
-1. Le nom des méthodes a été changer afin de rester coherents et utiliser qu'une seul langue, nous avons remarqué que certeines methodes étaient en francais et d'autres en anglais, on a décider de les garder en anglais vu que java comprend mieux l'anglais. Cependant, nous avons préféré garder les commentaires en francais vu vu que ce code a plus de chance d'etre lu par un public francais.
+1. Les noms des méthodes et variables ont été changé afin de rester cohérent et n'utiliser qu'une seul langue, nous avons remarqué que certaines méthodes étaient en francais et d'autres en anglais, on a décider de les garder en anglais vu que le langage Java lui-même comprend du syntaxe anglais. Cependant, nous avons préféré garder les commentaires en francais vu vu que ce code a plus de chance d'etre lu par un public francais.
 2. Ajout de nouvelles méthodes dans les classes suivantes:
 	- Arc:une seul methode ajoutée:setVideurOrZero() qui permet de determiner si modifier la nature d'un arc.
 	- ArcVideur:-
 	- ArcZero:on a preferé enlever fire car celle de la classe mere est suffisante.
 	- PetriNetwork:
-		-- addArcZero et addArcVideur ont été ajouté, car addArc ne premettait pas de distinguer dans l'ajout entre arc videur ou zero. la distinction est necessaire car la methode addArc ajouter aux entré ou à la sortie alors que les arcs speciaux sont toujours des arcs d entrées( à la transition).
+		-- addArcZero et addArcVideur ont été ajouté, car addArc ne permettait pas de distinguer dans l'ajout entre arc videur ou zero. la distinction est necessaire car la methode addArc ajouter aux entré ou à la sortie alors que les arcs speciaux sont toujours des arcs d entrées( à la transition).
 		-- getArc est une methode pour retourner la listes des arcs dns le petri. Necessaires pour acceder aux arcs à partir du petri.
 		-- showPetri:permet de visualiser les liaisons et les entités présente dans le petri. On n'envisageait pas de l'ajouter au debut pisqu'elle n'est pas primordiale au fonctionnement du petri, mais on a été demandé de la réaliser.
 		-- certaines fonction de création d'entitée dans le petri comme :create_transition_for_test, create_place_for_test ,create_arc_for_test,create_arc_videur_for_test et create_arc_zero_for_test ont été crée pur simplifier et factoriser la creation des entitées: arc, place, transition ... leur contructeur les initialisent sans les ajouter dans les listes de PetriNet et les listes de Transition, ceci est la raison principale de leurcréation.

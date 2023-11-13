@@ -24,9 +24,11 @@ public class ArcZero extends Arc {
      */
     @Override
     public boolean isActive() {
-        return this.getPlace().getNbreJetons() == 0;
+        return this.getPlace().getTokenNbre() == 0;
     }
 
     // Note: La méthode fire() n'est pas surchargée ici, car le comportement par défaut d'Arc est suffisant.
     // ArcZero ne modifie pas le nombre de jetons dans la place lorsqu'il est activé.
 }
+
+

@@ -6,10 +6,20 @@ import org.junit.jupiter.api.Test;
 //Classe de test pour ArcVideur, utilisant JUnit pour valider le comportement spécifique des ArcVideurs dans un réseau de Petri.
 
 class ArcVideurTest {
-	// Test pour vérifier que isActive retourne toujours vrai pour un ArcVideur.
-    
+
+	// Test pour vérifier la création correcte d'un ArcVideur.
 	@Test
-	void testIsActive() {
+	void arcVideurTest() {
+		Transition t = new Transition(null, null);
+		Place p = new Place(1);
+		// Vérifie que l'objet ArcVideur est créé correctement.
+	       
+		assertNotNull(new ArcVideur(t, p, true));
+	}
+	
+	// Test pour vérifier que isActive retourne toujours vrai pour un ArcVideur.
+	@Test
+	void isActiveTest() {
 		Transition t = new Transition(null, null);
 		Place p = new Place(1);
 		ArcVideur a = new ArcVideur(t, p, true);
@@ -17,10 +27,11 @@ class ArcVideurTest {
         
 		assertTrue(a.isActive());
 	}
+	
 	// Test pour vérifier le comportement de la méthode fire de ArcVideur.
     
 	@Test
-	void testFire() {
+	void fireTest() {
 		Transition t = new Transition(null, null);
 		Place p = new Place(1);
 		ArcVideur a = new ArcVideur(t, p, true);
@@ -28,7 +39,7 @@ class ArcVideurTest {
         
 		a.fire();
 		
-		assertEquals(p.getNbreJetons(), 0);
+		assertEquals(p.getTokenNbre(), 0);
 		// Test avec une place initialement vide pour confirmer que fire réinitialise toujours le nombre de jetons à 0.
         
 		Transition t2 = new Transition(null, null);
@@ -37,17 +48,8 @@ class ArcVideurTest {
 		
 		a2.fire();
 		
-		assertEquals(p2.getNbreJetons(), 0);
+		assertEquals(p2.getTokenNbre(), 0);
 	}
-	// Test pour vérifier la création correcte d'un ArcVideur.
-	   
-	@Test
-	void testArcVideur() {
-		Transition t = new Transition(null, null);
-		Place p = new Place(1);
-		// Vérifie que l'objet ArcVideur est créé correctement.
-	       
-		assertNotNull(new ArcVideur(t, p, true));
-	}
+
 
 }

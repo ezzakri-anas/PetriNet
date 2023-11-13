@@ -34,6 +34,6 @@ public class ArcVideur extends Arc{
     @Override
     public void fire() {
         Place p = this.getPlace();
-        p.setNbreJetons(0);
+        p.setTokenNbre(0);
     }
 }

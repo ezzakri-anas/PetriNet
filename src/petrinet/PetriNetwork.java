@@ -7,17 +7,17 @@ import java.util.Map;
  * Classe principale représentant un réseau de Petri, contenant des places, transitions et arcs.
  */
 public class PetriNetwork {
-    private LinkedList<Arc> liste_des_arcs;
-    private LinkedList<Transition> liste_des_transitions;
-    private LinkedList<Place> liste_des_places;
+    private LinkedList<Arc> list_of_arcs;
+    private LinkedList<Transition> list_of_transitions;
+    private LinkedList<Place> list_of_places;
     
     /**
      * Constructeur de la classe PetriNetwork. Initialise les listes pour les arcs, transitions et places.
      */
     public PetriNetwork() {
-        this.liste_des_arcs= new LinkedList<Arc>();
-        this.liste_des_transitions= new LinkedList<Transition>();
-        this.liste_des_places=new LinkedList<Place>();
+        this.list_of_arcs= new LinkedList<Arc>();
+        this.list_of_transitions= new LinkedList<Transition>();
+        this.list_of_places=new LinkedList<Place>();
     }
     
     /**
@@ -25,7 +25,7 @@ public class PetriNetwork {
      * @param Transitions Liste des transitions à définir.
      */
     public void setTransitionList(LinkedList<Transition> Transitions) {
-        this.liste_des_transitions=Transitions;
+        this.list_of_transitions=Transitions;
     }
 
     /**
@@ -33,7 +33,7 @@ public class PetriNetwork {
      * @return La liste des transitions.
      */
     public LinkedList<Transition> getTransitionList(){
-        return this.liste_des_transitions;
+        return this.list_of_transitions;
     }
 
     /**
@@ -41,7 +41,7 @@ public class PetriNetwork {
      * @param Places Liste des places à définir.
      */
     public void setPlaceList(LinkedList<Place> Places) {
-        this.liste_des_places=Places;
+        this.list_of_places=Places;
     }
 
     /**
@@ -49,7 +49,7 @@ public class PetriNetwork {
      * @return La liste des places.
      */
     public LinkedList<Place> getPlaceList(){
-        return this.liste_des_places;
+        return this.list_of_places;
     }
 
     /**
@@ -57,15 +57,15 @@ public class PetriNetwork {
      * @param transition Transition à ajouter.
      */
     public void addTransition(Transition transition) {
-        this.liste_des_transitions.add(transition);
+        this.list_of_transitions.add(transition);
     }
 
     /**
      * Supprime une transition spécifique du réseau.
      * @param transition Transition à supprimer.
      */
-    public void rmTransition(Transition transition) {
-        this.liste_des_transitions.removeIf(transitions -> transitions.equals(transition));
+    public void removeTransition(Transition transition) {
+        this.list_of_transitions.removeIf(transitions -> transitions.equals(transition));
     }
 
     /**
@@ -73,36 +73,36 @@ public class PetriNetwork {
      * @param place Place à ajouter.
      */
     public void addPlace(Place place) {
-        this.liste_des_places.add(place);
+        this.list_of_places.add(place);
     }
 
     /**
      * Supprime une place spécifique du réseau.
      * @param place Place à supprimer.
      */
-    public void rmPlace(Place place) {
-        this.liste_des_places.removeIf(p -> p.equals(place));
+    public void removePlace(Place place) {
+        this.list_of_places.removeIf(p -> p.equals(place));
     }
 
     /**
      * Ajoute un arc au réseau avec les paramètres spécifiés.
      * @param transition Transition associée à l'arc.
      * @param place Place associée à l'arc.
-     * @param poids Poids de l'arc.
+     * @param weight Poids de l'arc.
      * @param entrsort Booléen indiquant si l'arc est entrant ou sortant.
      * @param isZeroorVideur Booléen indiquant si l'arc est de type ArcZero ou ArcVideur.
      */
-	public void addArc(Transition transition, Place place, int poids,boolean entrsort, boolean isZeroorVideur) {
-		Arc arc= new Arc(poids,transition,place, isZeroorVideur);
+	public void addArc(Transition transition, Place place, int weight, boolean entrsort, boolean isZeroorVideur) {
+		Arc arc= new Arc(weight,transition,place, isZeroorVideur);
 		if (this.isArcUnique(arc)) {
-			this.liste_des_arcs.add(arc);
-			for(Transition T: this.liste_des_transitions) {
+			this.list_of_arcs.add(arc);
+			for(Transition T: this.list_of_transitions) {
 				if(T.equals(transition)) {
 					if(entrsort) {
-						T.addArcEntrant(arc);
+						T.addInputArc(arc);
 					}
 					else {
-						T.addArcsortant(arc);
+						T.addOutputArc(arc);
 					}
 				}
 			}
@@ -117,11 +117,11 @@ public class PetriNetwork {
 	public void addArcZero(Transition transition, Place place) {
 		Arc arc= new ArcZero(transition, place, true);
 		if (this.isArcUnique(arc)) {
-		this.liste_des_arcs.add(arc);
-		for(Transition T: this.liste_des_transitions) {
+		this.list_of_arcs.add(arc);
+		for(Transition T: this.list_of_transitions) {
 			if(T.equals(transition)) {
 				
-				T.addArcEntrant(arc);
+				T.addInputArc(arc);
 				
 				
 			}
@@ -136,11 +136,11 @@ public class PetriNetwork {
 	public void addArcVideur(Transition transition, Place place) {
 		Arc arc=new ArcVideur(transition,  place, true);
 		if (this.isArcUnique(arc)) {
-		this.liste_des_arcs.add(arc);
-		for(Transition T: this.liste_des_transitions) {
+		this.list_of_arcs.add(arc);
+		for(Transition T: this.list_of_transitions) {
 			if(T.equals(transition)) {
 				
-				T.addArcEntrant(arc);
+				T.addInputArc(arc);
 				
 				
 			}
@@ -153,7 +153,7 @@ public class PetriNetwork {
      */
 	public LinkedList<Arc> getArc() {
 		
-		return this.liste_des_arcs;
+		return this.list_of_arcs;
 	}
 	/**
      * Modifie le poids d'un arc spécifique.
@@ -161,16 +161,16 @@ public class PetriNetwork {
      * @param poids Nouveau poids de l'arc.
      */
 	public void changeArcValue (Arc arc, int poids) {
-		arc.setPoids(poids);
+		arc.setWeight(poids);
 		
 	}
 	/**
      * Définit le nombre de jetons pour une place donnée.
      * @param place Place pour laquelle modifier le nombre de jetons.
-     * @param nbrejetons Nouveau nombre de jetons pour la place.
+     * @param token_nbre Nouveau nombre de jetons pour la place.
      */
-	public void setPlaceJeton (Place place, int nbrejetons) {
-		place.setNbreJetons(nbrejetons);
+	public void setPlaceToken (Place place, int token_nbre) {
+		place.setTokenNbre(token_nbre);
 		
 	}
 	/**
@@ -179,7 +179,7 @@ public class PetriNetwork {
      * @return Booléen indiquant si l'arc est unique.
      */
 	public boolean isArcUnique (Arc arc) {
-		for (Arc arc_transitions : this.liste_des_arcs) {
+		for (Arc arc_transitions : this.list_of_arcs) {
 			if (arc_transitions.equals(arc)) {
 				return false;
 				
@@ -192,29 +192,29 @@ public class PetriNetwork {
      * Exécute un pas (tirage) sur une transition donnée.
      * @param T Transition sur laquelle effectuer le pas.
      */
-	public void Pas(Transition T) {
+	public void step(Transition T) {
 		//on verifie d abrd que c est titable
 		
-		boolean tirable= true;
-		for (Arc arc : T.getArcsEntrants()) {
+		boolean enabled= true;
+		for (Arc arc : T.getInputArcs()) {
 			if(!arc.isActive()) {
-				tirable= false;
+				enabled= false;
 			}
 			
 				
 			}
-		if(tirable) {
-			for (Arc arc : T.getArcsEntrants()) {
+		if(enabled) {
+			for (Arc arc : T.getInputArcs()) {
 			if(arc.isVideurOrZero()) {
 				arc.fire();
 			}
 			else {
 				if(arc.isActive()) {
-				arc.getPlace().rmNbreJetons(arc.getPoids());	
+				arc.getPlace().removeTokenNbre(arc.getWeight());	
 		}
 			}
-		for (Arc arc1 : T.getArcsSortants()) {
-			arc1.getPlace().setNbreJetons(arc1.getPlace().getNbreJetons()+arc1.getPoids());	
+		for (Arc arc1 : T.getOutputArcs()) {
+			arc1.getPlace().setTokenNbre(arc1.getPlace().getTokenNbre()+arc1.getWeight());	
 		}
 			
 		}
@@ -225,9 +225,9 @@ public class PetriNetwork {
 	/**
      * Exécute un pas (tirage) sur toutes les transitions du réseau.
      */
-	public void PasAll() {
-		for (Transition T : this.liste_des_transitions) {
-			this.Pas(T);
+	public void stepAll() {
+		for (Transition T : this.list_of_transitions) {
+			this.step(T);
 			}
 		
 	}
@@ -235,123 +235,123 @@ public class PetriNetwork {
 	/**
      * Affiche l'état actuel du réseau de Petri, y compris les informations sur les places, transitions et arcs.
      */
-	public void AfficherPetriNet() {
+	public String showPetriNet() {
 		
-		String MessageFinal = "Réseau de Petri \n";
+		String final_message = "Réseau de Petri \n";
 		
-		int nbre_arcs = this.liste_des_arcs.size();
-		int nbre_transitions = this.liste_des_transitions.size();
-		int nbre_places = this.liste_des_places.size();
+		int arcs_nbre = this.list_of_arcs.size();
+		int transitions_nbre = this.list_of_transitions.size();
+		int places_nbre = this.list_of_places.size();
 		
-		MessageFinal += nbre_places + " places\n";
-		MessageFinal += nbre_transitions + " transitions\n";	
-		MessageFinal += nbre_arcs + " arcs\n";	
+		final_message += places_nbre + " places\n";
+		final_message += transitions_nbre + " transitions\n";	
+		final_message += arcs_nbre + " arcs\n";	
 		
 
-		String MessageTransitions = "\nListe des transitions\n";
+		String transitions_message = "\nListe des transitions\n";
 		
-		for(int i=0; i<nbre_transitions; i++) {
-			Transition t = this.liste_des_transitions.get(i);
-			LinkedList<Arc> arcs_entrants = t.getArcsEntrants();
-			LinkedList<Arc> arcs_sortants = t.getArcsSortants();
-			MessageTransitions += i+1 + " : transition, " + arcs_entrants.size() + " arc(s) entrant(s), " + arcs_sortants.size() + " arc(s) sortant(s)\n";	
+		for(int i=0; i<transitions_nbre; i++) {
+			Transition t = this.list_of_transitions.get(i);
+			LinkedList<Arc> input_arcs = t.getInputArcs();
+			LinkedList<Arc> output_arcs = t.getOutputArcs();
+			transitions_message += i+1 + " : transition, " + input_arcs.size() + " arc(s) entrant(s), " + output_arcs.size() + " arc(s) sortant(s)\n";	
 		}
 		
-		MessageFinal += MessageTransitions;
+		final_message += transitions_message;
 		
 		Map<Object, Object> Arc_destination = new HashMap<>();
 		Map<Object, Object> Arc_source = new HashMap<>();
 		
-		Map<Object, LinkedList<Object>> Place_entrants = new HashMap<>();
-		Map<Object, LinkedList<Object>> Place_sortants = new HashMap<>();
+		Map<Object, LinkedList<Object>> inputs_of_places = new HashMap<>();
+		Map<Object, LinkedList<Object>> outputs_of_places = new HashMap<>();
 		
-		for(int i=0; i<nbre_transitions; i++) {
-			Transition t = this.liste_des_transitions.get(i);
+		for(int i=0; i<transitions_nbre; i++) {
+			Transition t = this.list_of_transitions.get(i);
 			
-			LinkedList<Arc> arcs_entrants = t.getArcsEntrants();
-			LinkedList<Arc> arcs_sortants = t.getArcsSortants();
+			LinkedList<Arc> input_arcs = t.getInputArcs();
+			LinkedList<Arc> output_arcs = t.getOutputArcs();
 			
 			
-			for(int j=0; j<arcs_entrants.size(); j++) {
-				Arc arc = arcs_entrants.get(j);
+			for(int j=0; j<input_arcs.size(); j++) {
+				Arc arc = input_arcs.get(j);
 				
 				Place place = arc.getPlace();
 				
 				Arc_destination.put(arc, t);
 				Arc_source.put(arc, arc.getPlace());
 				
-				if(Place_sortants.containsKey(place)) {
-					LinkedList<Object> values = Place_sortants.get(place);
+				if(outputs_of_places.containsKey(place)) {
+					LinkedList<Object> values = outputs_of_places.get(place);
 					values.addFirst(arc);
-					Place_sortants.put(place, values);
+					outputs_of_places.put(place, values);
 				} else {
 					LinkedList<Object> values = new LinkedList<Object>();
 					values.addFirst(arc);
-					Place_sortants.put(place, values);
+					outputs_of_places.put(place, values);
 				}
 			}
 			
-			for(int j=0; j<arcs_sortants.size(); j++) {
-				Arc arc = arcs_sortants.get(j);
+			for(int j=0; j<output_arcs.size(); j++) {
+				Arc arc = output_arcs.get(j);
 				Place place = arc.getPlace();
 				
 				Arc_destination.put(arc, arc.getPlace());
 				Arc_source.put(arc, t);
 				
-				if(Place_entrants.containsKey(place)) {
-					LinkedList<Object> values = Place_entrants.get(place);
+				if(inputs_of_places.containsKey(place)) {
+					LinkedList<Object> values = inputs_of_places.get(place);
 					values.addFirst(arc);
-					Place_entrants.put(place, values);
+					inputs_of_places.put(place, values);
 				} else {
 					LinkedList<Object> values = new LinkedList<Object>();
 					values.addFirst(arc);
-					Place_entrants.put(place, values);
+					inputs_of_places.put(place, values);
 				}
 			}
 		}
 		
-		String MessageArcs = "\nListe des arcs\n";	
+		String arcs_message = "\nListe des arcs\n";	
 		
-		for(int i=0; i<nbre_arcs; i++) {
-			Arc arc = this.liste_des_arcs.get(i);
+		for(int i=0; i<arcs_nbre; i++) {
+			Arc arc = this.list_of_arcs.get(i);
 			
 			Class<?> arc_class = arc.getClass();
 			
 			if(Arc_destination.get(arc) instanceof Place) {
-				MessageArcs += i+1 + " : arc de type " + arc_class + " poids " + arc.getPoids() + 
-						" (place avec " + arc.getPlace().getNbreJetons() + " jetons vers transition)\n";	
+				arcs_message += i+1 + " : arc de type " + arc_class + " poids " + arc.getWeight() + 
+						" (place avec " + arc.getPlace().getTokenNbre() + " jetons vers transition)\n";	
 			} else {
-				MessageArcs += i+1 + " : arc de type " + arc_class + " poids " + arc.getPoids() + 
-						" (Transition vers place avec " + arc.getPlace().getNbreJetons() + " jetons)\n";	
+				arcs_message += i+1 + " : arc de type " + arc_class + " poids " + arc.getWeight() + 
+						" (Transition vers place avec " + arc.getPlace().getTokenNbre() + " jetons)\n";	
 			}
 		}
 		
-		MessageFinal += MessageArcs;
+		final_message += arcs_message;
 		
 		
-		String MessagePlace = "\nListe des places\n";
+		String places_message = "\nListe des places\n";
 		
-		for(int i=0; i<nbre_places; i++) {
-			String message_arc_entrant = "";
-			String message_arc_sortant = "";
+		for(int i=0; i<places_nbre; i++) {
+			String imput_arc_message = "";
+			String output_arc_message = "";
 			
-			Place place = this.liste_des_places.get(i);
-			if(Place_entrants.containsKey(place)) {
-				int nbre_arc_entrant = Place_entrants.get(place).size();
-				message_arc_entrant = " " + nbre_arc_entrant + " arcs entrants,";
+			Place place = this.list_of_places.get(i);
+			if(inputs_of_places.containsKey(place)) {
+				int input_arcs_nbre = inputs_of_places.get(place).size();
+				imput_arc_message = " " + input_arcs_nbre + " arcs entrants,";
 			}
 			
-			if(Place_sortants.containsKey(place)) {
-				int nbre_arc_sortant = Place_sortants.get(place).size();
-				message_arc_sortant = " " + nbre_arc_sortant + " arcs sortants,";
+			if(outputs_of_places.containsKey(place)) {
+				int output_arcs_nbre = outputs_of_places.get(place).size();
+				output_arc_message = " " + output_arcs_nbre + " arcs sortants,";
 			}
 
-			MessagePlace += i+1 + " : place avec " + place.getNbreJetons() + " jetons, " + message_arc_entrant + "," + message_arc_sortant +"\n";
+			places_message += i+1 + " : place avec " + place.getTokenNbre() + " jetons, " + imput_arc_message + "," + output_arc_message +"\n";
 		}
 		
-		MessageFinal += MessagePlace;
+		final_message += places_message;
 		
-		System.out.println(MessageFinal);
+		return final_message;
 		
 	}
 	// Méthode principale pour exécuter et tester le réseau de Petri. Crée un réseau, y ajoute des éléments et exécute des pas.
@@ -370,10 +370,10 @@ public class PetriNetwork {
 //		Petri.AfficherPetriNet();
 
 		
-		Petri.PasAll();
+		Petri.stepAll();
 		
 		
-		Petri.AfficherPetriNet();
+		Petri.showPetriNet();
 
 	}
 	

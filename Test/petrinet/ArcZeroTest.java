@@ -6,10 +6,20 @@ import org.junit.jupiter.api.Test;
 //Classe de test pour ArcZero, utilisant JUnit pour valider le comportement spécifique des ArcZeros dans un réseau de Petri.
 
 class ArcZeroTest {
-	// Test pour vérifier le comportement de la méthode isActive de ArcZero.
-    
+
+	// Test pour vérifier la création correcte d'un ArcZero.
 	@Test
-	void testIsActive() {
+	void arcZeroTest() {
+		Transition t = new Transition(null, null);
+		Place p = new Place(1);
+		// Vérifie que l'objet ArcZero est créé correctement.
+        
+		assertNotNull(new ArcZero(t, p, true));
+	}
+	
+	// Test pour vérifier le comportement de la méthode isActive de ArcZero.
+	@Test
+	void isActiveTest() {
 		Transition t = new Transition(null, null);
 		Place p = new Place(1);
 		ArcZero a = new ArcZero(t, p, true);
@@ -18,18 +28,11 @@ class ArcZeroTest {
 		assertEquals(a.isActive(), false);
 		// Modification du nombre de jetons de la place pour tester le changement d'état de l'arc.
 	       
-		p.setNbreJetons(0);
+		p.setTokenNbre(0);
 		assertEquals(a.isActive(), true);
 	}
-	// Test pour vérifier la création correcte d'un ArcZero.
+	
     
-	@Test
-	void testArcZero() {
-		Transition t = new Transition(null, null);
-		Place p = new Place(1);
-		// Vérifie que l'objet ArcZero est créé correctement.
-        
-		assertNotNull(new ArcZero(t, p, true));
-	}
+
 
 }

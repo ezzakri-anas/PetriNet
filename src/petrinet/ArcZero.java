@@ -17,6 +17,7 @@ public class ArcZero extends Arc {
         super(transition, place, isVideurOrZero);
     }
 
+
     /**
      * Méthode isActive surchargée pour vérifier si l'arc est actif.
      * Un ArcZero est actif uniquement si le nombre de jetons dans la place associée est égal à zéro.
@@ -29,6 +30,7 @@ public class ArcZero extends Arc {
 
     // Note: La méthode fire() n'est pas surchargée ici, car le comportement par défaut d'Arc est suffisant.
     // ArcZero ne modifie pas le nombre de jetons dans la place lorsqu'il est activé.
+
 }
 
 

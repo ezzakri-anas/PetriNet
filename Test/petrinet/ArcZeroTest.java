@@ -13,10 +13,10 @@ class ArcZeroTest {
 		Transition t = new Transition(null, null);
 		Place p = new Place(1);
 		// Vérifie que l'objet ArcZero est créé correctement.
-        
+
 		assertNotNull(new ArcZero(t, p, true));
 	}
-	
+
 	// Test pour vérifier le comportement de la méthode isActive de ArcZero.
 	@Test
 	void isActiveTest() {
@@ -24,15 +24,15 @@ class ArcZeroTest {
 		Place p = new Place(1);
 		ArcZero a = new ArcZero(t, p, true);
 		// Un ArcZero est actif uniquement lorsque la place associée n'a aucun jeton.
-        
+
 		assertEquals(a.isActive(), false);
 		// Modification du nombre de jetons de la place pour tester le changement d'état de l'arc.
-	       
+
 		p.setTokenNbre(0);
 		assertEquals(a.isActive(), true);
 	}
-	
-    
+
+
 
 
 }

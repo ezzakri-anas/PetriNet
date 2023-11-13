@@ -30,8 +30,12 @@ class TransitionTest {
 	@Test
 	void setInputArcsTest() {
 		Transition T=new Transition(new LinkedList<Arc>() ,new LinkedList<Arc>() );
-		Place P= new Place(7);
-		Arc arc = new Arc(5, T, P, false);
+		
+		int tokens = 7;
+		Place P= new Place(tokens);
+		
+		int weight = 5;
+		Arc arc = new Arc(weight, T, P, false);
 		LinkedList<Arc> arcE= new LinkedList<Arc>();
 		arcE.add(arc);
 		T.setInputArcs(arcE);
@@ -49,8 +53,12 @@ class TransitionTest {
 	@Test
 	void setOutputArcsTest() {
 		Transition T=new Transition(new LinkedList<Arc>() ,new LinkedList<Arc>() );
-		Place P= new Place(7);
-		Arc arc = new Arc(5, T, P, false);
+		
+		int tokens = 7;
+		Place P= new Place(tokens);
+		
+		int weight = 5;
+		Arc arc = new Arc(weight, T, P, false);
 		LinkedList<Arc> arcS= new LinkedList<Arc>();
 		arcS.add(arc);
 		T.setOutputArcs(arcS);
@@ -61,8 +69,12 @@ class TransitionTest {
 	@Test
 	void addInputArcTest() {
 		Transition T=new Transition(new LinkedList<Arc>() ,new LinkedList<Arc>() );
-		Place P= new Place(7);
-		Arc arc = new Arc(5, T, P, false);
+		
+		int tokens = 7;
+		Place P= new Place(tokens);
+		
+		int weight = 5;
+		Arc arc = new Arc(weight, T, P, false);
 		LinkedList<Arc> arcE= new LinkedList<Arc>();
 		arcE.add(arc);
 		T.addInputArc(arc);
@@ -73,8 +85,12 @@ class TransitionTest {
 	@Test
 	void addOutputArcTest() {
 		Transition T=new Transition(new LinkedList<Arc>() ,new LinkedList<Arc>() );
-		Place P= new Place(7);
-		Arc arc = new Arc(5, T, P, false);
+		
+		int tokens = 7;
+		Place P= new Place(tokens);
+		
+		int weight = 5;
+		Arc arc = new Arc(weight, T, P, false);
 		LinkedList<Arc> arcS= new LinkedList<Arc>();
 		arcS.add(arc);
 		T.addOutputArc(arc);
@@ -85,8 +101,10 @@ class TransitionTest {
 	@Test
 	void removeArcTest() throws Exception {
 		Transition T=new Transition(new LinkedList<Arc>() ,new LinkedList<Arc>() );
-		Place P= new Place(7);
-		Arc arc = new Arc(5, T, P, false);
+		int tokens = 7;
+		Place P= new Place(tokens);
+		int weight = 5;
+		Arc arc = new Arc(weight, T, P, false);
 		// Ajoute puis supprime un arc de la liste des arcs sortants et vérifie que la liste est vide après.
 
 		LinkedList<Arc> arcS= new LinkedList<Arc>();

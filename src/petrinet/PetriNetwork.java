@@ -235,7 +235,7 @@ public class PetriNetwork {
 	/**
      * Affiche l'état actuel du réseau de Petri, y compris les informations sur les places, transitions et arcs.
      */
-	public void AfficherPetriNet() {
+	public String AfficherPetriNet() {
 		
 		String MessageFinal = "Réseau de Petri \n";
 		
@@ -351,7 +351,7 @@ public class PetriNetwork {
 		
 		MessageFinal += MessagePlace;
 		
-		System.out.println(MessageFinal);
+		return MessageFinal;
 		
 	}
 	// Méthode principale pour exécuter et tester le réseau de Petri. Crée un réseau, y ajoute des éléments et exécute des pas.

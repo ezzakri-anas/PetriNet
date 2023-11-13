@@ -1,4 +1,4 @@
-package petrinet;
+ package petrinet;
 
 /**
  * Classe représentant une place dans un réseau de Petri, caractérisée par un nombre de jetons.
